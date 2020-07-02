@@ -26,4 +26,9 @@ public class BoardController {
         model.addAttribute("boardList", boardService.findBoardList(pageable, BoardType.free));
         return "free";
     }
+
+    @GetMapping("/board")
+    public String post(){
+        return "boardform";
+    }
 }
