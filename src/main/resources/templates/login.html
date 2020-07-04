@@ -17,36 +17,42 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-				<header th:include="/html/header.html"></header>
+				<header th:include="html/header.html"></header>
 				<!-- Menu -->
-				<section th:include="/html/menu.html"></section>
+				<section th:include="html/menu.html"></section>
 
 				<!-- Main -->
 					<div id="main">
 
 						<!-- Post -->
-							<article class="post">
-								<div class="login-group" style="position: relative">
+							<article class="post" style="padding-top: 0;">
+								<div class="login-group" style="position: relative; height: 300px;">
 									<form id="loginForm" name="loginForm" method="post" action="/api/v2/login">
-										<div class="login-group">
+										<div class="login-group" style="position: absolute; width:30%; top:30%; left:30%;">
 											<div class="form-group">
 												<label for="studentId" class="sr-only">학번</label>
-												<input type="text" class="form-control" id="studentId" name="studentId" placeholder="학 번">
+												<input type="text" class="form-control" id="studentId" name="studentId" required minlength="8" maxlength="8" placeholder="학 번">
 											</div>
 											<div class="form-group">
 												<label for="phoneNumber" class="sr-only">핸드폰 번호</label>
-												<input type="password" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="핸 드 폰 번 호">
+												<input type="password" class="form-control" id="phoneNumber" name="phoneNumber" required maxlength="14" placeholder="핸 드 폰 번 호">
 											</div>
 										</div>
-										<button type="submit" class="login-button" id="signin"><i class="fa fa-chevron-right"></i></button>
+										<div style="position: absolute; width: 20%; top: 30%; left: 60%; font-size: 1.9em;">
+											<button type="submit" class="login-button" id="signin"><i class="fa fa-chevron-right"></i></button>
+										</div>
+										<div style="position: absolute; width: 50%; top: 60%; left: 30%; margin: 5px 0 0 3px;">
+											<label id="lg_error" name="lg_error" style="color: #e74c3c; visibility: hidden">가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.</label>
+										</div>
 									</form>
+
 								</div>
 							</article>
 
 					</div>
 
 				<!-- Footer -->
-				<section th:include="/html/footer.html"></section>
+				<section th:include="html/footer.html"></section>
 
 			</div>
 
@@ -56,7 +62,6 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
-			<script src="/js/login.js"></script>
 
 	</body>
 </html>

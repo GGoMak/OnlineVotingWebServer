@@ -2,6 +2,27 @@
 
   - Java Spring을 기반으로 하는 온라인 투표 웹 구현
   
+## 실행 방법
+
+```$xslt
+git clone https://github.com/GGoMak/OnlineVotingWebServer.git
+gradle build
+cd build/libs
+java -jar Vote-1.0-SNAPSHOT.jar
+```
+
+  - 테스트용 관리자ID
+```$xslt
+학번 : 20150000
+패스워드 : 123
+```
+
+  - 테스트용 유저ID
+```$xslt
+학번 : 20150001
+패스워드 : 123
+```
+  
 ## v1.0
 
   - 메인페이지 구현
@@ -25,6 +46,18 @@
   - Spring Security 설정(SecurityConfig.java, WebConfig.java)
   - SessionUser DTO 추가 및 편의성을 위한 LoginUser 어노테이션 구현
   
+## v1.2.1
+
+  - 로그인 폼 디자인 개선 및 유효성 검사 추가
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정
+  
+## 출처
+
+  - 소스코드
+    - 게시글 CRUD API : 스프링 부트와 AWS로 혼자 구현하는 웹 서비스(이동욱 저)
+    - 게시글 및 기본 템플릿 : 처음 배우는 스프링 부트 2(김영재 저)
+    
+  - 페이지 템플릿 : https://html5up.net/future-imperfect
