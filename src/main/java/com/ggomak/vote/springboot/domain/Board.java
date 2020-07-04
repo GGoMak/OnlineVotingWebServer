@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Setter
 @Getter // get 메소드 생성
 @NoArgsConstructor  // 생성자 생성
 @Entity // 테이블과 1대1 매칭
@@ -38,12 +37,29 @@ public class Board implements Serializable {
     @Column
     private LocalDateTime updatedDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
     @Builder
-    public Board(String title, String content, BoardType boardType, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public Board(String title, String content, BoardType boardType, LocalDateTime createdDate, LocalDateTime updatedDate, User user){
         this.title = title;
         this.content = content;
         this.boardType = boardType;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.user = user;
+    }
+
+    public void update(String title, String content, BoardType boardType) {    // 게시글 업데이트 메소드
+        this.title = title;
+        this.content = content;
+        this.boardType = boardType;
+        this.updatedDate = LocalDateTime.now();
+    }
+
+    public void setBoard(LocalDateTime createdDate, LocalDateTime updatedDate, User user){
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.user = user;
     }
 }

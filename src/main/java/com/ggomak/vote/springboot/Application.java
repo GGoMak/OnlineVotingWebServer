@@ -1,8 +1,12 @@
 package com.ggomak.vote.springboot;
 
 import com.ggomak.vote.springboot.domain.Board;
+import com.ggomak.vote.springboot.domain.User;
 import com.ggomak.vote.springboot.domain.enums.BoardType;
+import com.ggomak.vote.springboot.domain.enums.Department;
+import com.ggomak.vote.springboot.domain.enums.RoleType;
 import com.ggomak.vote.springboot.repository.BoardRepository;
+import com.ggomak.vote.springboot.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,8 +22,32 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner runner(BoardRepository boardRepository){
+    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository){
         return args -> {
+
+            User admin = userRepository.save(User.builder()
+                    .name("관리자")
+                    .studentId("20150000")
+                    .department(Department.computerScience)
+                    .dateOfBirth("960000")
+                    .phoneNumber("010-1234-5678")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.ADMIN)
+                    .build()
+            );
+
+            User user1 = userRepository.save(User.builder()
+                    .name("테스트")
+                    .studentId("20150001")
+                    .department(Department.accounting)
+                    .dateOfBirth("960000")
+                    .phoneNumber("010-431-8765")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.VOTER)
+                    .build()
+            );
 
             IntStream.rangeClosed(1, 20).forEach(index ->
                     boardRepository.save(Board.builder()
@@ -28,6 +56,7 @@ public class Application {
                             .boardType(BoardType.notice)
                             .createdDate(LocalDateTime.now())
                             .updatedDate(LocalDateTime.now())
+                            .user(admin)
                             .build()));
 
             IntStream.rangeClosed(1, 20).forEach(index ->
@@ -37,6 +66,7 @@ public class Application {
                             .boardType(BoardType.free)
                             .createdDate(LocalDateTime.now())
                             .updatedDate(LocalDateTime.now())
+                            .user(admin)
                             .build()));
 
             boardRepository.save(Board.builder()
@@ -45,6 +75,7 @@ public class Application {
                     .boardType(BoardType.notice)
                     .createdDate(LocalDateTime.now())
                     .updatedDate(LocalDateTime.now())
+                    .user(admin)
                     .build());
 
             boardRepository.save(Board.builder()
@@ -53,6 +84,7 @@ public class Application {
                     .boardType(BoardType.free)
                     .createdDate(LocalDateTime.now())
                     .updatedDate(LocalDateTime.now())
+                    .user(admin)
                     .build());
 
             boardRepository.save(Board.builder()
@@ -61,6 +93,7 @@ public class Application {
                     .boardType(BoardType.free)
                     .createdDate(LocalDateTime.now())
                     .updatedDate(LocalDateTime.now())
+                    .user(admin)
                     .build());
         };
     }

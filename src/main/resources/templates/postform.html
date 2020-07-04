@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>OO 대학교 온라인 투표 시스템</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header th:include="/html/header.html"></header>
+
+				<!-- Menu -->
+					<section th:include="/html/menu.html"></section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h5><a href="/free">글 쓰기</a></h5>
+									</div>
+									<div class="meta">
+										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
+										<div th:if="${sessionUser}">
+											<time class="published" datetime="2020-07-03">July 3, 2020</time>
+											<a href="#" class="author"><span class="name" style="margin-right: 1px;" th:text="${sessionUser.name}"></span><h3 style="margin-bottom: 0px;">님 환영합니다.</h3><img style="margin-left: 3px;" src="images/avatar.jpg" alt="" /></a>
+										</div>
+									</div>
+								</header>
+
+								<input id="board_idx" type="hidden" th:value="${board?.idx}"/>
+								<table class="table">
+									<tr>
+										<th style="padding: 13px 0 0 15px;">게시판 선택</th>
+										<td>
+											<div class="pull-left">
+												<select class="form-control imput-sm" id="board_type" name="board_type">
+													<option>--게시판--</option>
+													<option th:value="notice" th:selected="${board?.boardType?.name() == 'notice'}">공지사항</option>
+													<option th:value="free" th:selected="${board?.boardType?.name() == 'free'}">자유게시판</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">제목</th>
+										<td><input id="board_title" name="board_title" type="text" class="col-md-1 form-control input-sm" th:value="${board?.title}"/></td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">내용</th>
+										<td><textarea id="board_content" name="board_content" class="col-md-1 form-control input-sm" style="height: 350px;" th:text="${board?.content}"></textarea><span class="help-block"></span></td>
+								</table>
+
+								<div class="bottom-button">
+									<div class="pull-left">
+										<button class="btn btn-primary" onclick="history.back()">목록으로</button>
+									</div>
+
+									<div class="pull-right">
+										<button th:if="!${board?.idx}" type="button" class="btn btn-primary" id="save">글 쓰기</button>
+										<button th:if="${board?.idx}" type="button" class="btn btn-primary" id="update">완료</button>
+									</div>
+								</div>
+
+							</article>
+					</div>
+
+				<!-- Footer -->
+					<section th:include="/html/footer.html"></section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/browser.min.js"></script>
+			<script src="/js/breakpoints.min.js"></script>
+			<script src="/js/util.js"></script>
+			<script src="/js/main.js"></script>
+			<script src="/js/board.js"></script>
+
+	</body>
+</html>

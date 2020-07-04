@@ -17,122 +17,36 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1><a href="/">OO 대학교 온라인 투표</a></h1>
-						<nav class="links">
-							<ul>
-								<li><a href="/notice">공 지 사 항</a></li>
-								<li><a href="/free">자 유 게 시 판</a></li>
-								<li><a href="/vote">투 표 하 기</a></li>
-								<li><a href="/result">개 표 결 과</a></li>
-								<li><a href="/qna">Q & A</a></li>
-							</ul>
-						</nav>
-						<nav class="main">
-							<ul>
-								<!--
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
-									</form>
-								-->
-								</li>
-								<li class="menu">
-									<a class="fa-bars" href="#menu">Menu</a>
-								</li>
-							</ul>
-						</nav>
-					</header>
-
+				<header th:include="/html/header.html"></header>
 				<!-- Menu -->
-					<section id="menu">
-
-						<!-- Search
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
-						-->
-						<!-- Links -->
-							<section>
-								<ul class="links">
-									<li>
-										<a href="/notice">
-											<h3>공 지 사 항</h3>
-											<p>Notice Board</p>
-										</a>
-									</li>
-									<li>
-										<a href="/free">
-											<h3>자 유 게 시 판</h3>
-											<p>Free Board</p>
-										</a>
-									</li>
-									<li>
-										<a href="/vote">
-											<h3>투 표 하 기</h3>
-											<p>Go to Vote</p>
-										</a>
-									</li>
-									<li>
-										<a href="/result">
-											<h3>개 표 결 과</h3>
-											<p>Counting Vote Result</p>
-										</a>
-									</li>
-								</ul>
-							</section>
-
-						<!-- Actions -->
-							<section>
-								<ul class="actions stacked">
-									<li><a href="/login" class="button large fit">로그인 하기</a></li>
-								</ul>
-							</section>
-
-					</section>
+				<section th:include="/html/menu.html"></section>
 
 				<!-- Main -->
 					<div id="main">
 
 						<!-- Post -->
 							<article class="post">
-								<header>
-									<div class="title">
-										<h2><a href="/free">자 유 게 시 판</a></h2>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2015-11-01">November 1, 2015</time>
-										<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-									</div>
-								</header>
-								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-								<p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
-								<footer>
-									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon solid fa-heart">28</a></li>
-										<li><a href="#" class="icon solid fa-comment">128</a></li>
-									</ul>
-								</footer>
+								<div class="login-group" style="position: relative">
+									<form id="loginForm" name="loginForm" method="post" action="/api/v2/login">
+										<div class="login-group">
+											<div class="form-group">
+												<label for="studentId" class="sr-only">학번</label>
+												<input type="text" class="form-control" id="studentId" name="studentId" placeholder="학 번">
+											</div>
+											<div class="form-group">
+												<label for="phoneNumber" class="sr-only">핸드폰 번호</label>
+												<input type="password" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="핸 드 폰 번 호">
+											</div>
+										</div>
+										<button type="submit" class="login-button" id="signin"><i class="fa fa-chevron-right"></i></button>
+									</form>
+								</div>
 							</article>
 
 					</div>
 
 				<!-- Footer -->
-					<section id="footer">
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
-					</section>
+				<section th:include="/html/footer.html"></section>
 
 			</div>
 
@@ -142,6 +56,7 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
+			<script src="/js/login.js"></script>
 
 	</body>
 </html>

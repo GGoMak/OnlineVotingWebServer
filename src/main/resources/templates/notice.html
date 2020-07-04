@@ -17,82 +17,9 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1><a href="/">OO 대학교 온라인 투표</a></h1>
-						<nav class="links">
-							<ul>
-								<li><a href="/notice">공 지 사 항</a></li>
-								<li><a href="/free">자 유 게 시 판</a></li>
-								<li><a href="/vote">투 표 하 기</a></li>
-								<li><a href="/result">개 표 결 과</a></li>
-								<li><a href="/qna">Q & A</a></li>
-							</ul>
-						</nav>
-						<nav class="main">
-							<ul>
-								<!--
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
-									</form>
-								-->
-								</li>
-								<li class="menu">
-									<a class="fa-bars" href="#menu">Menu</a>
-								</li>
-							</ul>
-						</nav>
-					</header>
-
+				<header th:include="/html/header.html"></header>
 				<!-- Menu -->
-					<section id="menu">
-
-						<!-- Search
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
-						-->
-						<!-- Links -->
-							<section>
-								<ul class="links">
-									<li>
-										<a href="/notice">
-											<h3>공 지 사 항</h3>
-											<p>Notice Board</p>
-										</a>
-									</li>
-									<li>
-										<a href="/free">
-											<h3>자 유 게 시 판</h3>
-											<p>Free Board</p>
-										</a>
-									</li>
-									<li>
-										<a href="/vote">
-											<h3>투 표 하 기</h3>
-											<p>Go to Vote</p>
-										</a>
-									</li>
-									<li>
-										<a href="/result">
-											<h3>개 표 결 과</h3>
-											<p>Counting Vote Result</p>
-										</a>
-									</li>
-								</ul>
-							</section>
-
-						<!-- Actions -->
-							<section>
-								<ul class="actions stacked">
-									<li><a href="/login" class="button large fit">로그인 하기</a></li>
-								</ul>
-							</section>
-
-					</section>
+				<section th:include="/html/menu.html"></section>
 
 				<!-- Main -->
 					<div id="main">
@@ -101,11 +28,14 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="/notice">공 지 사 항</a></h2>
+										<h5><a href="/notice">공지사항</a></h5>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01">November 1, 2015</time>
-										<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
+										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
+										<div th:if="${sessionUser}">
+											<time class="published" datetime="2020-07-03">July 3, 2020</time>
+											<a href="#" class="author"><span class="name" style="margin-right: 1px;" th:text="${sessionUser.name}"></span><h3 style="margin-bottom: 0px;">님 환영합니다.</h3><img style="margin-left: 3px;" src="images/avatar.jpg" alt="" /></a>
+										</div>
 									</div>
 								</header>
 								<table>
@@ -121,25 +51,40 @@
 									<tr th:each="board : ${boardList}">
 										<td th:text="${board.idx}"></td>
 										<td><a th:href="'/board?idx='+${board.idx}" th:text="${board.title}"></a></td>
-										<td th:text="${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')}"></td>
+										<td th:text="${board.user.name}"></td>
 										<td th:text="${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')}"></td>
 									</tr>
 									</tbody>
 								</table>
+
+								<!-- Pagination -->
+								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px">
+									<ul class="pagination" style="margin-top: 9px" th:with="startNumber=${T(Math).floor(boardList.number/10)}*10+1, endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages}">
+										<li><a aria-label="Previous" href="/notice?page=1">&laquo;</a></li>
+										<li th:style="${boardList.first} ? 'display:none'">
+											<a th:href="@{/notice(page=${boardList.number})}">&lsaquo;</a>
+										</li>
+
+										<li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active'">
+											<a th:href="@{/notice(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+										</li>
+
+										<li th:style="${boardList.last} ? 'display:none'">
+											<a th:href="@{/notice(page=${boardList.number}+2)}">&rsaquo;</a>
+										</li>
+										<li><a aria-label="Next" th:href="@{/notice(page=${boardList.totalPages})}">&raquo;</a></li>
+									</ul>
+
+									<div style="float: right">
+										<button class="btn btn-primary" th:if="${sessionUser?.roleType?.name() == 'ADMIN'}" onclick="location.href='/post'">글 쓰기</button>
+									</div>
+								</nav>
+
 							</article>
 					</div>
 
 				<!-- Footer -->
-					<section id="footer">
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
-					</section>
+				<section th:include="/html/footer.html"></section>
 
 			</div>
 

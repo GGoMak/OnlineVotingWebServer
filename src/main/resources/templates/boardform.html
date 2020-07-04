@@ -28,8 +28,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="#">OO 대학교 온라인 투표 시스템</a></h2>
-										<p>투표 기간 XXXX.XX.XX ~ XXXX.XX.XX</p>
+										<h5><a href="javascript:history.back()" th:text="${board.boardType.getValue()}"></a></h5>
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
@@ -39,15 +38,37 @@
 										</div>
 									</div>
 								</header>
-								<span class="image featured"><img src="images/pic01.jpg" alt="OO대학교 투표 배너" /></span>
-								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-								<p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
-							</article>
 
+								<div class="container">
+									<input id="board_idx" type="hidden" th:value="${board?.idx}"/>
+									<input id="board_type" type="hidden" th:value="${board?.boardType}"/>
+									<table class="table">
+										<tr>
+											<th>제목</th>
+											<td><textarea id="board_title" name="board_title" th:text="${board?.title}" readonly/></td>
+										</tr>
+										<tr>
+											<th>내용</th>
+											<td><textarea id="board_content" name="board_content" style="height: 350px;" th:text="${board?.content}" readonly></textarea></td>
+										</tr>
+									</table>
+
+									<div class="bottom-button">
+										<div class="pull-left">
+											<button class="btn btn-primary" onclick="history.back()">목록으로</button>
+										</div>
+
+										<div class="pull-right">
+											<button th:if="${sessionUser.studentId == board.user.studentId}" type="button" class="btn btn-info" th:onclick="'window.location.href=\'/modify?idx=' + ${board.idx} + '\''">수정</button>
+											<button th:if="${sessionUser.studentId == board.user.studentId}" type="button" class="btn btn-danger" id="delete">삭제</button>
+										</div>
+									</div>
+								</div>
+							</article>
 					</div>
 
 				<!-- Footer -->
-				<section th:include="/html/footer.html"></section>
+					<section th:include="/html/footer.html"></section>
 
 			</div>
 
@@ -57,6 +78,7 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
+			<script src="/js/board.js"></script>
 
 	</body>
 </html>
