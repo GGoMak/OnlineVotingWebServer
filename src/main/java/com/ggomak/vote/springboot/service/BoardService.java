@@ -35,6 +35,7 @@ public class BoardService {
         return boardRepository.findById(idx).orElse(new Board());
     }
 
+    // 게시글 저장
     @Transactional
     public Long save(Board board, SessionUser user) {
 

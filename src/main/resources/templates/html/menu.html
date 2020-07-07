@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/voteinfo">
                     <h2>투 표 하 기</h2>
                     <p>Go to Vote</p>
                 </a>
@@ -25,6 +25,12 @@
                 <a href="#">
                     <h2>개 표 결 과</h2>
                     <p>Counting Vote Result</p>
+                </a>
+            </li>
+            <li th:if="${sessionUser?.roleType?.name() == 'ADMIN'}">
+                <a href="/userinfo">
+                    <h2>후 보 자 등 록</h2>
+                    <p>Register Candidate</p>
                 </a>
             </li>
         </ul>

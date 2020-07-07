@@ -1,0 +1,39 @@
+/* 수정 */
+.pagination{
+    display:inline-block;
+    padding-left:0;
+    border-radius:4px
+}
+.pagination>li {
+    display:inline
+}
+
+.bottom-button{
+    display:inline-block;
+    width: 100%;
+}
+
+.pull-left{
+    float: left;
+}
+
+.pull-right{
+    float: right;
+}
+
+.voteinfo{
+    text-align: center;
+    border: solid 1px rgba(100, 100, 100, 0.3);
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.votebutton{
+    font-size: 1.0em;
+    margin-bottom: 20px;
+    padding: 0 90px 0 90px;
+}
+
+.usertable td{
+    padding: 0.25em 0.25em;
+}

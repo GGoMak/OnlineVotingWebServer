@@ -2,7 +2,7 @@ var login = {
     init : function () {
         var _this = this;
         $('#signin').on('click', function () {
-            //_this.signin();
+            _this.signin();
         });
     },
 
@@ -31,7 +31,7 @@ var login = {
         }).done(function() {
             window.location.href = '/';
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            $('#lg_error').visible(true);
             $('#phoneNumber').val("");
         });
     }

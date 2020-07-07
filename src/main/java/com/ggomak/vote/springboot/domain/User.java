@@ -59,6 +59,14 @@ public class User implements Serializable {
         this.roleType = roleType;
     }
 
+    public void updateCandidate(){
+        this.roleType = RoleType.CANDIDATE;
+    }
+
+    public void updateVoter(){
+        this.roleType = RoleType.VOTER;
+    }
+
     public String getRoleKey() {
         return this.roleType.getKey();
     }

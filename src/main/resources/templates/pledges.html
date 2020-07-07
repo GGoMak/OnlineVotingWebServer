@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>OO 대학교 온라인 투표 시스템</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/css/main.css"/>
+		<link rel="stylesheet" href="/css/sub.css"/>
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#" th:text="${pledge.department.getValue()} + ' 선거공약'"></a></h2>
+										<p th:text="${pledge.title}"></p>
+									</div>
+								</header>
+								<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+									<img th:src="${pledge.posterPath} + ${pledge.posterFileName}">
+								</div>
+							</article>
+					</div>
+
+				<!-- Footer -->
+				<section th:include="html/footer.html"></section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/browser.min.js"></script>
+			<script src="/js/breakpoints.min.js"></script>
+			<script src="/js/util.js"></script>
+			<script src="/js/main.js"></script>
+
+	</body>
+</html>

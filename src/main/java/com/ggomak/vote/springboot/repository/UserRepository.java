@@ -1,13 +1,29 @@
 package com.ggomak.vote.springboot.repository;
 
 import com.ggomak.vote.springboot.domain.User;
+import com.ggomak.vote.springboot.domain.enums.Department;
+import com.ggomak.vote.springboot.domain.enums.RoleType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByIdx(Long idx);
-
     Optional<User> findByStudentId(String studentId);
+
+    List<User> findAllByRoleType(RoleType roleType);
+
+    @Query("Select c from User c where c.department like %:department%")
+    Page<User> findAllByDepartment(Pageable pageable, Department department);
+
+    @Query("Select c from User c where c.name like %:name%")
+    Page<User> findAllByName(Pageable pageable, String name);
+
+    @Query("Select c from User c where c.studentId like %:studentId%")
+    Page<User> findAllByStudentId(Pageable pageable, String studentId);
 }

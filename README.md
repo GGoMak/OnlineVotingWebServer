@@ -50,9 +50,18 @@ java -jar Vote-1.0-SNAPSHOT.jar
 
   - 로그인 폼 디자인 개선 및 유효성 검사 추가
   
+## v1.3
+
+  - '투표하기' 페이지 구성
+  - 후보자 등록 페이지 및 User DB 조회 및 검색 기능 추가(관리자만 이용가능)
+  - 선거 공약(포스터) 열람 페이지 구현
+  
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정
+  - 후보자 등록 페이지의 소속 검색을 위한 ENUM Type Query 어노테이션 수정
+  
   
 ## 출처
 
