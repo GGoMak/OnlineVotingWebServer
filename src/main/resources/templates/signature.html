@@ -29,7 +29,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="#">투표하기</a></h2>
+										<h2><a href="#">전자서명</a></h2>
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
@@ -39,23 +39,13 @@
 										</div>
 									</div>
 								</header>
-								<div style="border:1px solid black; display: flex; justify-content: center; align-items: center;">
-									<h2 style="vertical-align: center" th:text="${sessionUser.name} + '님이 현재 가능한 투표입니다.'"></h2>
+								<div style="display: flex; justify-content: center; align-items: center;">
+									<canvas id="canvas" style="border:1px solid black;"></canvas>
 								</div>
-
-								<table>
-									<thead>
-									<tr>
-										<th style="text-align: center">투표 목록</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="vote : ${voteList}">
-										<td style="text-align: center"><a th:href="'/vote?idx=' + ${vote.idx}" th:text="'OO 대학교 ' + ${vote.department.getValue()}"></td>
-									</tr>
-									</tbody>
-								</table>
-
+								<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+									<button style="margin-right: 10px;" onclick="onClear();">다 시 쓰 기</button>
+									<button onclick="location.href='/votelist'">서 명 확 인</button>
+								</div>
 							</article>
 					</div>
 
@@ -70,6 +60,7 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
+			<script src="/js/signature.js"></script>
 
 	</body>
 </html>

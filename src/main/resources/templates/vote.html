@@ -9,7 +9,7 @@
 		<title>OO 대학교 온라인 투표 시스템</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/css/main.css"/>
+		<link rel="stylesheet" href="/css/main.css" />
 		<link rel="stylesheet" href="/css/sub.css"/>
 	</head>
 	<body class="single is-preload">
@@ -39,24 +39,24 @@
 										</div>
 									</div>
 								</header>
-								<div style="border:1px solid black; display: flex; justify-content: center; align-items: center;">
-									<h2 style="vertical-align: center" th:text="${sessionUser.name} + '님이 현재 가능한 투표입니다.'"></h2>
+
+								<h2 style="float: left; font-size: 1.5em; margin-bottom: 0; margin-right: 20px;" th:text="${candidate.department.getValue()}"></h2>
+								<p style="font-size: 1.4em; margin-bottom: 10px;" th:text="${candidate.teamName}"></p>
+
+								<input id="candidate_idx" type="hidden" th:value="${candidate?.idx}"/>
+
+								<div style="width: 60%; float: left; height: 250px;">
+									<img th:src="${candidate.imgPath} + ${candidate.thumbnail1}" style="width: 200px; height: 200px;">
+									<img th:src="${candidate.imgPath} + ${candidate.thumbnail2}" style="width: 200px; height: 200px;">
+									<img th:if="${candidate.thumbnail3}" th:src="${candidate.imgPath} + ${candidate.thumbnail3}" style="width: 200px; height: 200px;">
+								</div>
+								<div style="display: flex; width: 40%; justify-content: center; align-items: center; height: 250px;">
+									<button id="positive" style="box-sizing: border-box; font-size:1.1em">찬성</button>
+									<button id="negative" style="box-sizing: border-box; font-size:1.1em">반대</button>
 								</div>
 
-								<table>
-									<thead>
-									<tr>
-										<th style="text-align: center">투표 목록</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="vote : ${voteList}">
-										<td style="text-align: center"><a th:href="'/vote?idx=' + ${vote.idx}" th:text="'OO 대학교 ' + ${vote.department.getValue()}"></td>
-									</tr>
-									</tbody>
-								</table>
-
 							</article>
+
 					</div>
 
 				<!-- Footer -->
@@ -70,6 +70,8 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
+			<script src="/js/vote.js"></script>
+
 
 	</body>
 </html>

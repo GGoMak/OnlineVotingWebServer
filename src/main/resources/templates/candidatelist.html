@@ -9,7 +9,7 @@
 		<title>OO 대학교 온라인 투표 시스템</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/css/main.css"/>
+		<link rel="stylesheet" href="/css/main.css" />
 		<link rel="stylesheet" href="/css/sub.css"/>
 	</head>
 	<body class="single is-preload">
@@ -29,7 +29,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="#">투표하기</a></h2>
+										<h5><a href="/votelist">후보자 공약보기</a></h5>
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
@@ -39,22 +39,16 @@
 										</div>
 									</div>
 								</header>
-								<div style="border:1px solid black; display: flex; justify-content: center; align-items: center;">
-									<h2 style="vertical-align: center" th:text="${sessionUser.name} + '님이 현재 가능한 투표입니다.'"></h2>
-								</div>
 
-								<table>
-									<thead>
-									<tr>
-										<th style="text-align: center">투표 목록</th>
-									</tr>
-									</thead>
+								<table style="text-align: center; width: 60%; left:20%; position: relative;">
 									<tbody>
-									<tr th:each="vote : ${voteList}">
-										<td style="text-align: center"><a th:href="'/vote?idx=' + ${vote.idx}" th:text="'OO 대학교 ' + ${vote.department.getValue()}"></td>
+									<tr th:each="candidate : ${candidateList}" style="font-size: 1.5em; margin: 20px 0 20px 0;">
+										<td><a th:href="'/pledges?department='+${candidate}" target="_blank" th:text="'2020 OO 대학교 ' + ${candidate} + ' 공약보기'"></a></td>
 									</tr>
 									</tbody>
 								</table>
+
+								<button class="voteinfo" style="position: relative; padding: 0; width: 30%; left:35%; font-size: 1.1em" onclick="location.href='/signature'">투표하러가기</button>
 
 							</article>
 					</div>

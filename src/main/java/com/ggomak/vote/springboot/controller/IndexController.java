@@ -1,7 +1,7 @@
 package com.ggomak.vote.springboot.controller;
 
-import com.ggomak.vote.springboot.domain.Pledge;
 import com.ggomak.vote.springboot.domain.enums.BoardType;
+import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.oauthsecurity.annotation.LoginUser;
 import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.service.BoardService;
@@ -10,13 +10,11 @@ import com.ggomak.vote.springboot.service.VoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.mail.Session;
 
 @Controller
 @RequiredArgsConstructor
@@ -84,11 +82,11 @@ public class IndexController {
         return "voteinfo";
     }
 
-    @GetMapping("/votelist")
+    @GetMapping("/candidatelist")
     public String voteList(Model model, @LoginUser SessionUser user){
-        model.addAttribute("voteList", userService.findCandidateList());
+        model.addAttribute("candidateList", userService.findCandidateList());
         model.addAttribute("sessionUser", user);
-        return "votelist";
+        return "candidatelist";
     }
 
     @GetMapping("/pledges")
@@ -96,5 +94,31 @@ public class IndexController {
         model.addAttribute("pledge", voteService.findPledge(department));
         model.addAttribute("sessionUser", user);
         return "pledges";
+    }
+
+    @GetMapping("/signature")
+    public String signature(Model model, @LoginUser SessionUser user){
+        model.addAttribute("sessionUser", user);
+        return "signature";
+    }
+
+    @GetMapping("/votelist")
+    public String votelist(Model model, @LoginUser SessionUser user){
+        model.addAttribute("voteList", voteService.findPledge(user.getDepartment().getValue()));
+        model.addAttribute("sessionUser", user);
+        return "votelist";
+    }
+
+    @GetMapping("/vote")
+    public String vote(@RequestParam(value = "idx") Long idx, Model model, @LoginUser SessionUser user){
+        model.addAttribute("candidate", voteService.findCandidate(idx));
+        model.addAttribute("sessionUser", user);
+        return "vote";
+    }
+
+    @GetMapping("/voteend")
+    public String voteEnd(Model model, @LoginUser SessionUser user){
+        model.addAttribute("sessionUser", user);
+        return "voteend";
     }
 }

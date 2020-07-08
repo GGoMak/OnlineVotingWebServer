@@ -39,23 +39,16 @@
 										</div>
 									</div>
 								</header>
-								<div style="border:1px solid black; display: flex; justify-content: center; align-items: center;">
-									<h2 style="vertical-align: center" th:text="${sessionUser.name} + '님이 현재 가능한 투표입니다.'"></h2>
+								<div class="voteinfo">
+									<h1 style="font-size: 1.5em;"><U>감사합니다.</U></h1>
+									<h3>모든 투표가 완료되었습니다.</h3></br>
+									<span>이 페이지는 5초 후 메인 페이지로 이동됩니다.</span></br>
+									<meta http-equiv="refresh" content="5; url=/">
 								</div>
 
-								<table>
-									<thead>
-									<tr>
-										<th style="text-align: center">투표 목록</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="vote : ${voteList}">
-										<td style="text-align: center"><a th:href="'/vote?idx=' + ${vote.idx}" th:text="'OO 대학교 ' + ${vote.department.getValue()}"></td>
-									</tr>
-									</tbody>
-								</table>
-
+								<div style="text-align: center">
+									<button class="votebutton" onclick="window.location.href='/logout'">투 표 종 료</button>
+								</div>
 							</article>
 					</div>
 

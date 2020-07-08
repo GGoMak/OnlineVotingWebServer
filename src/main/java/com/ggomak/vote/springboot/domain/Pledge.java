@@ -4,14 +4,16 @@ import com.ggomak.vote.springboot.domain.enums.Department;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter // get 메소드 생성
 @NoArgsConstructor  // 생성자 생성
 @Entity // 테이블과 1대1 매칭
 @Table  // 테이블 설정
-public class Pledge {
+public class Pledge implements Serializable {
 
     @Id
     @Column

@@ -1,12 +1,14 @@
 package com.ggomak.vote.springboot;
 
 import com.ggomak.vote.springboot.domain.Board;
+import com.ggomak.vote.springboot.domain.Candidate;
 import com.ggomak.vote.springboot.domain.Pledge;
 import com.ggomak.vote.springboot.domain.User;
 import com.ggomak.vote.springboot.domain.enums.BoardType;
 import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
 import com.ggomak.vote.springboot.repository.BoardRepository;
+import com.ggomak.vote.springboot.repository.CandidateRepository;
 import com.ggomak.vote.springboot.repository.PledgeRepository;
 import com.ggomak.vote.springboot.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +26,7 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository, PledgeRepository pledgeRepository){
+    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository, PledgeRepository pledgeRepository, CandidateRepository candidateRepository){
         return args -> {
 
             User admin = userRepository.save(User.builder()
@@ -68,7 +70,7 @@ public class Application {
                             .phoneNumber("010-7777-7777")
                             .password("{noop}123")
                             .lastLoginTime(LocalDateTime.now())
-                            .roleType(RoleType.CANDIDATE)
+                            .roleType(RoleType.GUEST)
                             .build()));
 
             userRepository.save(User.builder()
@@ -93,7 +95,7 @@ public class Application {
                     .roleType(RoleType.GUEST)
                     .build()
             );
-            userRepository.save(User.builder()
+            User user2 = userRepository.save(User.builder()
                     .name("임나연")
                     .studentId("20150004")
                     .department(Department.computerScience)
@@ -101,7 +103,7 @@ public class Application {
                     .phoneNumber("010-3333-3333")
                     .password("{noop}123")
                     .lastLoginTime(LocalDateTime.now())
-                    .roleType(RoleType.GUEST)
+                    .roleType(RoleType.CANDIDATE)
                     .build()
             );
             userRepository.save(User.builder()
@@ -126,7 +128,7 @@ public class Application {
                     .roleType(RoleType.GUEST)
                     .build()
             );
-            userRepository.save(User.builder()
+            User user3 = userRepository.save(User.builder()
                     .name("미나토자키 사나")
                     .studentId("20150007")
                     .department(Department.computerScience)
@@ -134,7 +136,7 @@ public class Application {
                     .phoneNumber("010-6666-6666")
                     .password("{noop}123")
                     .lastLoginTime(LocalDateTime.now())
-                    .roleType(RoleType.GUEST)
+                    .roleType(RoleType.CANDIDATE)
                     .build()
             );
 
@@ -184,6 +186,18 @@ public class Application {
                     .updatedDate(LocalDateTime.now())
                     .user(admin)
                     .build());
+
+            Candidate candidate = candidateRepository.save(Candidate.builder()
+                    .department(Department.computerScience)
+                    .imgPath("/images/")
+                    .teamName("선거운동 본부")
+                    .user1(user2)
+                    .user2(user3)
+                    .thumbnail1("pic03.jpg")
+                    .thumbnail2("pic04.jpg")
+                    .thumbnail3(null)
+                    .build()
+            );
         };
     }
 }
