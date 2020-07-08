@@ -26,7 +26,7 @@
 					<div id="main">
 
 						<!-- Post -->
-							<article class="post">
+							<article class="post" style="overflow: hidden;">
 								<header>
 									<div class="title">
 										<h2><a href="#">투표하기</a></h2>
@@ -45,14 +45,28 @@
 
 								<input id="candidate_idx" type="hidden" th:value="${candidate?.idx}"/>
 
-								<div style="width: 60%; float: left; height: 250px;">
-									<img th:src="${candidate.imgPath} + ${candidate.thumbnail1}" style="width: 200px; height: 200px;">
-									<img th:src="${candidate.imgPath} + ${candidate.thumbnail2}" style="width: 200px; height: 200px;">
-									<img th:if="${candidate.thumbnail3}" th:src="${candidate.imgPath} + ${candidate.thumbnail3}" style="width: 200px; height: 200px;">
-								</div>
-								<div style="display: flex; width: 40%; justify-content: center; align-items: center; height: 250px;">
-									<button id="positive" style="box-sizing: border-box; font-size:1.1em">찬성</button>
-									<button id="negative" style="box-sizing: border-box; font-size:1.1em">반대</button>
+								<div style="width: 100%;">
+									<div style="width: 670px; height: 300px; margin: 0 auto 20px auto; float: left; border: solid 1px rgba(160, 160, 160, 0.3); padding: 20px;">
+										<div style="width: 200px; height: 200px; display: inline-block; vertical-align: top; margin-right: 5px;">
+											<img th:src="${candidate.imgPath} + ${candidate.thumbnail1}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+											<h1 style="margin-bottom: 0px; text-align: center">정후보</h1>
+											<p style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate1().name}"></p>
+										</div>
+										<div style="width: 200px; height: 200px; display: inline-block; vertical-align: top;">
+											<img th:src="${candidate.imgPath} + ${candidate.thumbnail2}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+											<h1 style="margin-bottom: 0px; text-align: center">부후보</h1>
+											<p style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate2().name}"></p>
+										</div>
+										<div th:if="${candidate.thumbnail3}" style="width: 200px; height: 200px; display: inline-block; vertical-align: top; margin-right: 5px;">
+											<img th:if="${candidate.thumbnail3}" th:src="${candidate.imgPath} + ${candidate.thumbnail3}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+											<h1 th:if="${candidate.thumbnail3}" style="margin-bottom: 0px; text-align: center">부후보</h1>
+											<p th:if="${candidate.thumbnail3}" style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate3().name}"></p>
+										</div>
+									</div>
+									<div style="display: flex; height:300px; justify-content: center; align-items: center;">
+										<button id="positive" style="box-sizing: border-box; font-size:1.1em; margin-right: 20px;">찬성</button>
+										<button id="negative" style="box-sizing: border-box; font-size:1.1em">반대</button>
+									</div>
 								</div>
 
 							</article>

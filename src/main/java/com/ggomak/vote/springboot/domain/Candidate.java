@@ -27,13 +27,13 @@ public class Candidate implements Serializable {
     private Department department;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private User user1;
+    private User candidate1;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private User user2;
+    private User candidate2;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private User user3;
+    private User candidate3;
 
     @Column
     private String imgPath;
@@ -51,9 +51,9 @@ public class Candidate implements Serializable {
     public Candidate(String teamName, Department department, User user1, User user2, User user3, String imgPath, String thumbnail1, String thumbnail2, String thumbnail3){
         this.teamName = teamName;
         this.department = department;
-        this.user1 = user1;
-        this.user2 = user2;
-        this.user3 = user3;
+        this.candidate1 = user1;
+        this.candidate2 = user2;
+        this.candidate3 = user3;
         this.imgPath = imgPath;
         this.thumbnail1 = thumbnail1;
         this.thumbnail2 = thumbnail2;

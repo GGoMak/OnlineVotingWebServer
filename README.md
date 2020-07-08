@@ -62,17 +62,21 @@ java -jar Vote-1.0-SNAPSHOT.jar
   - 후보자 리스트 및 투표 페이지 구성
   - 투표하기 API 구현
   
+## v1.4.1
+
+  - 투표 페이지 디자인 수정
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정
   - ~~후보자 등록 페이지의 소속 검색을 위한 ENUM Type Query 어노테이션 수정~~
-  
+  - 투표하기 페이지 디자인 추후 개선 필요  
   
 ## 출처
 
   - 소스코드
     - 게시글 CRUD API : 스프링 부트와 AWS로 혼자 구현하는 웹 서비스(이동욱 저)
     - 게시글 Pageable : 처음 배우는 스프링 부트 2(김영재 저)
-    - 전자서명 canvas : 네이버 블로그(세 아이 아빠의 일상 기록)
+    - 전자서명 javascript : 네이버 블로그(세 아이 아빠의 일상 기록)
     
   - 페이지 템플릿 : https://html5up.net/future-imperfect
