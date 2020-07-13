@@ -91,11 +91,11 @@ public class IndexController {
     }
 
     // 후보자 리스트(공약보기)
-    @GetMapping("/candidatelist")
+    @GetMapping("/pledgelist")
     public String voteList(Model model, @LoginUser SessionUser user){
-        model.addAttribute("candidateList", userService.findCandidateList());
+        model.addAttribute("candidateList", userService.findCandidateListHash());
         model.addAttribute("sessionUser", user);
-        return "candidatelist";
+        return "pledgelist";
     }
 
     // 공약
@@ -116,7 +116,7 @@ public class IndexController {
     // 투표 리스트
     @GetMapping("/votelist")
     public String votelist(Model model, @LoginUser SessionUser user){
-        model.addAttribute("voteList", voteService.findPledge(user.getDepartment().getValue()));
+        model.addAttribute("voteList", voteService.findCandidateByDepartment(user.getDepartment(), user));
         model.addAttribute("sessionUser", user);
         return "votelist";
     }
@@ -124,7 +124,7 @@ public class IndexController {
     // 투표하기
     @GetMapping("/vote")
     public String vote(@RequestParam(value = "idx") Long idx, Model model, @LoginUser SessionUser user){
-        model.addAttribute("candidate", voteService.findCandidate(idx));
+        model.addAttribute("candidate", voteService.findCandidateByIdx(idx));
         model.addAttribute("sessionUser", user);
         return "vote";
     }
@@ -134,5 +134,27 @@ public class IndexController {
     public String voteEnd(Model model, @LoginUser SessionUser user){
         model.addAttribute("sessionUser", user);
         return "voteend";
+    }
+
+    // 투표결과
+    @GetMapping("/result")
+    public String result(Model model, @LoginUser SessionUser user){
+        model.addAttribute("sessionUser", user);
+        return "result";
+    }
+
+    // 등록된 후보 리스트
+    @GetMapping("/candidatelist")
+    public String registedCandidate(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("candidateList", userService.findCandidateList());
+        model.addAttribute("sessionUser", user);
+        return "candidatelist";
+    }
+
+    // 후보등록
+    @GetMapping("/regcandidate")
+    public String regCandidate(Model model, @LoginUser SessionUser user){
+        model.addAttribute("sessionUser", user);
+        return "regcandidate";
     }
 }

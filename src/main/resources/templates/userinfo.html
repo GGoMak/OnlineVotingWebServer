@@ -29,7 +29,7 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h5><a href="/notice">후보자 등록</a></h5>
+										<h5><a href="/notice">유저 정보</a></h5>
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
@@ -40,22 +40,25 @@
 									</div>
 								</header>
 
-								<div style="width: 35%; float:right; height: 60px;">
+								<div >
+								<button>전체 투표자 설정</button>
+								<div style="width: 35%; float:right; overflow: hidden;">
 									<form id="search_word" name="search_word" method="get" action="/userinfo">
-										<select id="search_type" name="type" style="float:left; width: 30%">
+										<select id="search_type" name="type" style="width: 30%; display: inline-block;">
 											<!--
 											<option th:value="department">소속</option>
 											-->
 											<option th:value="studentId">학번</option>
 											<option th:value="name">이름</option>
 										</select>
-										<input type="text" name="value" placeholder="Search" style="width: 50%;"/>
-										<button type="submit" style="float: right; display: block"></button>
+										<input type="text" name="value" placeholder="Search" style="width: 50%; display: inline-block;"/>
+										<button type="submit" style="display: inline-block; padding: 5px 5px 5px 5px;"><img src="/images/search.png" style="width: 25px; height: 25px;"></button>
 									</form>
+								</div>
 								</div>
 
 
-								<table class="usertable">
+								<table class="usertable" name="usertable" id="usertable">
 									<thead>
 									<tr>
 										<th class="col-3">#</th>
@@ -63,7 +66,6 @@
 										<th class="col-2">학번</th>
 										<th class="col-2">이름</th>
 										<th class="col-1">역할</th>
-										<th class="col-1"></th>
 									</tr>
 									</thead>
 									<tbody>
@@ -72,14 +74,20 @@
 										<td th:text="${user.department.getValue()}"></td>
 										<td th:text="${user.studentId}"></td>
 										<td th:text="${user.name}"></td>
-										<td th:text="${user.roleType.getTitle()}"></td>
-										<td><button id="regist">등록</button></td>
+										<td>
+										<select id="user_type" name="user_type" style="width: 150px; padding-right: 0">
+											<option th:value="GUEST" th:selected="${user?.roleType?.name() == 'GUEST'}">손님</option>
+											<option th:value="VOTER" th:selected="${user?.roleType?.name() == 'VOTER'}">투표자</option>
+											<option th:value="ADMIN" th:selected="${user?.roleType?.name() == 'ADMIN'}">관리자</option>
+										</select>
+										</td>
+										<td><button th:onclick="'javascript:roleChange('+ ${user.idx} +')'">변경</button></td>
 									</tr>
 									</tbody>
 								</table>
 
 								<!-- Pagination -->
-								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px">
+								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px;">
 									<ul class="pagination" style="margin-top: 9px" th:with="startNumber=${T(Math).floor(userList.number/10)}*10+1, endNumber=(${userList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${userList.totalPages}">
 										<li><a aria-label="Previous" href="/notice?page=1">&laquo;</a></li>
 										<li th:style="${userList.first} ? 'display:none'">
@@ -110,6 +118,7 @@
 			<script src="/js/breakpoints.min.js"></script>
 			<script src="/js/util.js"></script>
 			<script src="/js/main.js"></script>
+			<script src="/js/userinfo.js"></script>
 
 	</body>
 </html>

@@ -22,15 +22,15 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <h2>개 표 결 과</h2>
+                <a href="/result">
+                    <h2>투 표 결 과</h2>
                     <p>Counting Vote Result</p>
                 </a>
             </li>
             <li th:if="${sessionUser?.roleType?.name() == 'ADMIN'}">
                 <a href="/userinfo">
-                    <h2>후 보 자 등 록</h2>
-                    <p>Register Candidate</p>
+                    <h2>유 저 정 보</h2>
+                    <p>User Info</p>
                 </a>
             </li>
         </ul>

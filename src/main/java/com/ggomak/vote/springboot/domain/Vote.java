@@ -28,10 +28,14 @@ public class Vote implements Serializable {
     @Column
     private boolean opposite;
 
+    @Column
+    private String ipAddress;
+
     @Builder
-    public Vote(Candidate candidate, LocalDateTime voteTime, boolean opposite){
+    public Vote(Candidate candidate, LocalDateTime voteTime, boolean opposite, String ipAddress){
         this.candidate = candidate;
         this.voteTime = voteTime;
         this.opposite = opposite;
+        this.ipAddress = ipAddress;
     }
 }

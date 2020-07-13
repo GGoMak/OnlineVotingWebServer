@@ -1,7 +1,10 @@
 package com.ggomak.vote.springboot.service;
 
+import com.ggomak.vote.springboot.domain.Candidate;
 import com.ggomak.vote.springboot.domain.User;
+import com.ggomak.vote.springboot.domain.dto.UserRoleChangeDTO;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
+import com.ggomak.vote.springboot.repository.CandidateRepository;
 import com.ggomak.vote.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,7 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,6 +23,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CandidateRepository candidateRepository;
 
     // User list 출력
     public Page<User> findUserList(Pageable pageable, String type, String value) {
@@ -38,7 +44,7 @@ public class UserService {
     }
 
     // Vote List 출력
-    public HashSet<String> findCandidateList() {
+    public HashSet<String> findCandidateListHash() {
 
         List<User> userArrayList = userRepository.findAllByRoleType(RoleType.CANDIDATE);
         HashSet<String> hashSet = new HashSet<>();
@@ -50,12 +56,38 @@ public class UserService {
         return hashSet;
     }
 
+    public List<Candidate> findCandidateList() {
+
+        return candidateRepository.findAll();
+    }
+
+    @Transactional
     // 후보자 권한 설정
-    public Long candidateRegistration(Long idx){
+    public Long roleChange(UserRoleChangeDTO requestDTO){
+
+        User user = userRepository.findById(requestDTO.getIdx()).get();
+
+        switch (requestDTO.getValue()){
+            case "GUEST":
+                user.updateGuest();
+                break;
+            case "VOTER":
+                user.updateVoter();
+                break;
+            case "ADMIN":
+                user.updateAdmin();
+                break;
+        }
+
+        return user.getIdx();
+    }
+
+    @Transactional
+    public Long candidateResign(Long idx){
         User user = userRepository.findById(idx)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + idx));
 
-        user.updateCandidate();
+        user.updateGuest();
 
         return idx;
     }

@@ -47,8 +47,11 @@ public class User implements Serializable {
     @Column(nullable = false)
     private RoleType roleType;
 
+    @Column
+    private boolean isVoted;
+
     @Builder
-    public User(String name, String studentId, Department department, String dateOfBirth, String phoneNumber, String password, LocalDateTime lastLoginTime, RoleType roleType){
+    public User(String name, String studentId, Department department, String dateOfBirth, String phoneNumber, String password, LocalDateTime lastLoginTime, RoleType roleType, boolean isVoted){
         this.name = name;
         this.studentId = studentId;
         this.department = department;
@@ -57,14 +60,27 @@ public class User implements Serializable {
         this.password = password;
         this.lastLoginTime = lastLoginTime;
         this.roleType = roleType;
+        this.isVoted = isVoted;
     }
 
     public void updateCandidate(){
         this.roleType = RoleType.CANDIDATE;
     }
 
+    public void updateGuest(){
+        this.roleType = RoleType.GUEST;
+    }
+
     public void updateVoter(){
         this.roleType = RoleType.VOTER;
+    }
+
+    public void updateAdmin() {
+        this.roleType = RoleType.ADMIN;
+    }
+
+    public void updateisVoted(boolean value) {
+        this.isVoted = value;
     }
 
     public String getRoleKey() {

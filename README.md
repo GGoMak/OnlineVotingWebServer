@@ -19,7 +19,7 @@ java -jar Vote-1.0-SNAPSHOT.jar
 
   - 테스트용 유저ID
 ```$xslt
-학번 : 20150001
+학번 : 20150010 ~ 20150039
 패스워드 : 123
 ```
   
@@ -66,11 +66,18 @@ java -jar Vote-1.0-SNAPSHOT.jar
 
   - 투표 페이지 디자인 수정
   
+## v1.4.2
+
+  - 중복투표방지 기능 추가
+  - 유저 권한 설정 기능 추가
+  - Vote DB IP주소 항목 추가
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정
   - ~~후보자 등록 페이지의 소속 검색을 위한 ENUM Type Query 어노테이션 수정~~
   - 투표하기 페이지 디자인 추후 개선 필요  
+  - DB에 유저 IP정보 추가
   
 ## 출처
 

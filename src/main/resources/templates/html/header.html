@@ -5,8 +5,9 @@
             <li><a href="/notice">공지사항</a></li>
             <li><a href="/free">자유게시판</a></li>
             <li><a href="/voteinfo">투표하기</a></li>
-            <li><a href="#">개표결과</a></li>
-            <li th:if="${sessionUser?.roleType?.name() == 'ADMIN'}"><a href="/userinfo">후보자 등록</a></li>
+            <li><a href="/result">투표결과</a></li>
+            <li th:if="${sessionUser?.roleType?.name() == 'ADMIN'}"><a href="/userinfo">유저정보</a></li>
+            <li th:if="${sessionUser?.roleType?.name() == 'ADMIN'}"><a href="/candidatelist">후보등록</a></li>
         </ul>
     </nav>
     <nav class="main">

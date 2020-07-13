@@ -50,7 +50,10 @@
 									</tr>
 									</thead>
 									<tbody>
-									<tr th:each="vote : ${voteList}">
+									<tr th:if="${voteList == null}">
+										<td style="text-align: center">가능한 투표가 없습니다.</td>
+									</tr>
+									<tr th:if="${voteList != null}" th:each="vote : ${voteList}">
 										<td style="text-align: center"><a th:href="'/vote?idx=' + ${vote.idx}" th:text="'OO 대학교 ' + ${vote.department.getValue()}"></td>
 									</tr>
 									</tbody>
