@@ -22,7 +22,14 @@ java -jar Vote-1.0-SNAPSHOT.jar
 학번 : 20150010 ~ 20150039
 패스워드 : 123
 ```
-  
+
+## 설정
+
+  - src/main/java/com/ggomak/vote/springboot/oauthsecurity/config/WebConfig.java에서 이미지 경로 지정
+```$xslt
+registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미지 폴더 경로}").setCachePeriod(0);
+```
+
 ## v1.0
 
   - 메인페이지 구현
@@ -83,6 +90,12 @@ java -jar Vote-1.0-SNAPSHOT.jar
     - 후보자 사진 업로드
     - 공약 포스터 업로드
     - 후보자 전체 목록 출력
+    
+## v1.5.1
+
+  - 공약 포스터 및 후보자 사진 접근 문제로 인한 이미지 외부 경로 설정
+    - WebConfig ResourceHandler 추가
+  - 후보자 등록 예외처리 추가
   
 ## QA
 
@@ -90,6 +103,7 @@ java -jar Vote-1.0-SNAPSHOT.jar
   - ~~후보자 등록 페이지의 소속 검색을 위한 ENUM Type Query 어노테이션 수정~~
   - 투표하기 페이지 디자인 추후 개선 필요  
   - DB에 유저 IP정보 추가
+  - ~~Image 업로드 시 접근 문제 발생~~
   
 ## 출처
 

@@ -43,13 +43,13 @@
 								<table style="text-align: center; width: 60%; left:20%; position: relative;">
 									<tbody>
 									<tr th:each="pledge : ${pledgeList}" style="font-size: 1.5em; margin: 20px 0 20px 0;">
-										<td><a th:href="'/pledges?department='+${pledge.department}" target="_blank" th:text="'2020 OO 대학교 ' + ${pledge.department.getValue()} + ' 공약보기'"></a></td>
+										<td><a th:href="'/pledges?idx='+${pledge.idx}" target="_blank" th:text="'2020 OO 대학교 ' + ${pledge.department.getValue()} + ' ' + ${pledge.teamName}+' 공약보기'"></a></td>
 									</tr>
 									</tbody>
 								</table>
 
 								<!-- Pagination -->
-								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px">
+								<nav aria-label="Page navigation" style="text-align: center;">
 									<ul class="pagination" style="margin-top: 9px" th:with="startNumber=${T(Math).floor(pledgeList.number/10)}*10+1, endNumber=(${pledgeList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${pledgeList.totalPages}">
 										<li><a aria-label="Previous" href="/notice?page=1">&laquo;</a></li>
 										<li th:style="${pledgeList.first} ? 'display:none'">

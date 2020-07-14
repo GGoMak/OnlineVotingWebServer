@@ -46,19 +46,19 @@
 								<input id="candidate_idx" type="hidden" th:value="${candidate?.idx}"/>
 
 								<div style="width: 100%;">
-									<div style="width: 670px; height: 300px; margin: 0 auto 20px auto; float: left; border: solid 1px rgba(160, 160, 160, 0.3); padding: 20px;">
-										<div style="width: 200px; height: 200px; display: inline-block; vertical-align: top; margin-right: 5px;">
-											<img th:src="${candidate.imgPath} + ${candidate.thumbnail1}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+									<div style="width: 670px; height: 360px; margin: 0 auto 20px auto; float: left; border: solid 1px rgba(160, 160, 160, 0.3); padding: 20px;">
+										<div style="width: 200px; height: 300px; display: inline-block; vertical-align: top; margin-right: 5px;">
+											<img th:src="@{'images/' + ${candidate.teamName} + '/' + ${candidate.thumbnail1}}" style="width: 200px; height: 260px; border: solid 2px rgba(160, 160, 160, 0.3);">
 											<h1 style="margin-bottom: 0px; text-align: center">정후보</h1>
 											<p style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate1().name}"></p>
 										</div>
-										<div style="width: 200px; height: 200px; display: inline-block; vertical-align: top;">
-											<img th:src="${candidate.imgPath} + ${candidate.thumbnail2}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+										<div style="width: 200px; height: 300px; display: inline-block; vertical-align: top;">
+											<img th:src="@{'images/' + ${candidate.teamName} + '/' + ${candidate.thumbnail2}}" style="width: 200px; height: 260px; border: solid 2px rgba(160, 160, 160, 0.3);">
 											<h1 style="margin-bottom: 0px; text-align: center">부후보</h1>
 											<p style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate2().name}"></p>
 										</div>
-										<div th:if="${candidate.thumbnail3}" style="width: 200px; height: 200px; display: inline-block; vertical-align: top; margin-right: 5px;">
-											<img th:if="${candidate.thumbnail3}" th:src="${candidate.imgPath} + ${candidate.thumbnail3}" style="width: 200px; height: 200px; border: solid 2px rgba(160, 160, 160, 0.3);">
+										<div th:if="${candidate.thumbnail3}" style="width: 200px; height: 300px; display: inline-block; vertical-align: top; margin-right: 5px;">
+											<img th:if="${candidate.thumbnail3}" th:src="@{'images/' + ${candidate.teamName} + '/' + ${candidate.thumbnail3}}" style="width: 200px; height: 260px; border: solid 2px rgba(160, 160, 160, 0.3);">
 											<h1 th:if="${candidate.thumbnail3}" style="margin-bottom: 0px; text-align: center">부후보</h1>
 											<p th:if="${candidate.thumbnail3}" style="text-align: center; padding-right: 5px; margin-bottom: 5px;" th:text="${candidate.getCandidate3().name}"></p>
 										</div>

@@ -28,7 +28,7 @@
 									</div>
 								</header>
 								<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
-									<img th:src="${pledge.imgPath} + ${pledge.pledgePoster}">
+									<img th:src="@{'images/' + ${pledge.teamName} + '/' + ${pledge.pledgePoster}}">
 								</div>
 							</article>
 					</div>

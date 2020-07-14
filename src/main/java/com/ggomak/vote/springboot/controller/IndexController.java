@@ -100,8 +100,8 @@ public class IndexController {
 
     // 공약
     @GetMapping("/pledges")
-    public String pledges(@RequestParam(value = "department") String department, Model model, @LoginUser SessionUser user){
-        model.addAttribute("pledge", voteService.findPledge(department));
+    public String pledges(@RequestParam(value = "idx") Long idx, Model model, @LoginUser SessionUser user){
+        model.addAttribute("pledge", voteService.findPledge(idx));
         model.addAttribute("sessionUser", user);
         return "pledges";
     }

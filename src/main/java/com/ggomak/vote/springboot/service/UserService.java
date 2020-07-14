@@ -29,7 +29,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final CandidateRepository candidateRepository;
-    private String filePath = "/Users/ggomak/Desktop/Vote/src/main/resources/static/images/";
+    private String filePath = "/Users/ggomak/Desktop/VoteImgDir/";
 
     // User list 출력
     public Page<User> findUserList(Pageable pageable, String type, String value) {
@@ -86,20 +86,20 @@ public class UserService {
                     .user1(userRepository.findByStudentId(requestDto.getCandidate1()).get())
                     .user2(userRepository.findByStudentId(requestDto.getCandidate2()).get())
                     .user3(userRepository.findByStudentId(requestDto.getCandidate3()).get())
-                    .imgPath("/images/")
-                    .thumbnail1(requestDto.getTeamName() + '_' + requestDto.getCandidate1())
-                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate1())
-                    .thumbnail3(requestDto.getTeamName() + '_' + requestDto.getCandidate1())
-                    .pledgePoster("Pledge_" + requestDto.getTeamName())
+                    .imgPath(filePath)
+                    .thumbnail1(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
+                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
+                    .thumbnail3(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
+                    .pledgePoster("Pledge_" + requestDto.getTeamName() + ".jpg")
                     .build()
             );
             userRepository.updateRole(requestDto.getCandidate1(), RoleType.CANDIDATE);
             userRepository.updateRole(requestDto.getCandidate2(), RoleType.CANDIDATE);
             userRepository.updateRole(requestDto.getCandidate3(), RoleType.CANDIDATE);
 
-            fileUpload(picture.get(0), filePath+requestDto.getTeamName()+'/', requestDto.getTeamName() + '_' + requestDto.getCandidate1());
-            fileUpload(picture.get(1), filePath+requestDto.getTeamName()+'/', requestDto.getTeamName() + '_' + requestDto.getCandidate2());
-            fileUpload(picture.get(2), filePath+requestDto.getTeamName()+'/', requestDto.getTeamName() + '_' + requestDto.getCandidate3());
+            fileUpload(picture.get(0), filePath + requestDto.getTeamName() + '/', requestDto.getTeamName() + '_' + requestDto.getCandidate1());
+            fileUpload(picture.get(1), filePath + requestDto.getTeamName() + '/', requestDto.getTeamName() + '_' + requestDto.getCandidate2());
+            fileUpload(picture.get(2), filePath + requestDto.getTeamName() + '/', requestDto.getTeamName() + '_' + requestDto.getCandidate3());
         }
         else{
             candidateRepository.save(Candidate.builder()
@@ -107,20 +107,20 @@ public class UserService {
                     .department(requestDto.getDepartment())
                     .user1(userRepository.findByStudentId(requestDto.getCandidate1()).get())
                     .user2(userRepository.findByStudentId(requestDto.getCandidate2()).get())
-                    .imgPath("/images/")
-                    .thumbnail1(requestDto.getTeamName() + '_' + requestDto.getCandidate1())
-                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate2())
-                    .pledgePoster("Pledge_" + requestDto.getTeamName())
+                    .imgPath(filePath)
+                    .thumbnail1(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
+                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate2() + ".jpg")
+                    .pledgePoster("Pledge_" + requestDto.getTeamName() + ".jpg")
                     .build()
             );
 
             userRepository.updateRole(requestDto.getCandidate1(), RoleType.CANDIDATE);
             userRepository.updateRole(requestDto.getCandidate2(), RoleType.CANDIDATE);
-            fileUpload(picture.get(0), filePath+requestDto.getTeamName()+'/', requestDto.getTeamName() + '_' + requestDto.getCandidate1());
-            fileUpload(picture.get(1), filePath+requestDto.getTeamName()+'/', requestDto.getTeamName() + '_' + requestDto.getCandidate2());
+            fileUpload(picture.get(0), filePath + requestDto.getTeamName() + '/', requestDto.getTeamName() + '_' + requestDto.getCandidate1());
+            fileUpload(picture.get(1), filePath + requestDto.getTeamName() + '/', requestDto.getTeamName() + '_' + requestDto.getCandidate2());
         }
 
-        fileUpload(poster, filePath+requestDto.getTeamName()+'/', "Pledge_" + requestDto.getTeamName());
+        fileUpload(poster, filePath + requestDto.getTeamName() + '/', "Pledge_" + requestDto.getTeamName());
 
         return null;
     }

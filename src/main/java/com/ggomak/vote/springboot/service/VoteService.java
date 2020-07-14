@@ -26,9 +26,9 @@ public class VoteService {
     private final VoteRepository voteRepository;
     private final UserRepository userRepository;
 
-    public Candidate findPledge(String department){
+    public Candidate findPledge(Long idx){
 
-        return candidateRepository.findByDepartment(Department.valueOf(department));
+        return candidateRepository.findById(idx).get();
     }
 
     public Candidate findCandidateByIdx(Long idx) {
@@ -44,9 +44,7 @@ public class VoteService {
             return null;
         }
 
-        List<Candidate> candidates = new ArrayList<>();
-
-        candidates.add(candidateRepository.findByDepartment(department));
+        List<Candidate> candidates = new ArrayList<>(candidateRepository.findByDepartment(department));
 
         return candidates;
     }
