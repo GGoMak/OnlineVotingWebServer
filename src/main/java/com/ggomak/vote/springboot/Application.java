@@ -6,10 +6,7 @@ import com.ggomak.vote.springboot.domain.User;
 import com.ggomak.vote.springboot.domain.enums.BoardType;
 import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
-import com.ggomak.vote.springboot.repository.BoardRepository;
-import com.ggomak.vote.springboot.repository.CandidateRepository;
-import com.ggomak.vote.springboot.repository.PledgeRepository;
-import com.ggomak.vote.springboot.repository.UserRepository;
+import com.ggomak.vote.springboot.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +22,7 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository, PledgeRepository pledgeRepository, CandidateRepository candidateRepository){
+    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository, CandidateRepository candidateRepository, VoteRepository voteRepository){
         return args -> {
 
             User admin = userRepository.save(User.builder()
@@ -42,7 +39,7 @@ public class Application {
 
             IntStream.rangeClosed(1, 9).forEach(index ->
                     userRepository.save(User.builder()
-                            .name("컴퓨터학부" + index)
+                            .name("컴학" + index)
                             .studentId("2015001" + index)
                             .department(Department.computerScience)
                             .dateOfBirth("960000")
@@ -55,7 +52,7 @@ public class Application {
 
             IntStream.rangeClosed(1, 9).forEach(index ->
                     userRepository.save(User.builder()
-                            .name("철학과" + index)
+                            .name("철학" + index)
                             .studentId("2015002" + index)
                             .department(Department.philosophy)
                             .dateOfBirth("960000")
@@ -68,7 +65,7 @@ public class Application {
 
             IntStream.rangeClosed(1, 9).forEach(index ->
                     userRepository.save(User.builder()
-                            .name("회계학과" + index)
+                            .name("회계" + index)
                             .studentId("2015003" + index)
                             .department(Department.accounting)
                             .dateOfBirth("960000")
@@ -109,6 +106,7 @@ public class Application {
                     .thumbnail1("pic01.jpg")
                     .thumbnail2("pic02.jpg")
                     .thumbnail3("pic03.jpg")
+                    .pledgePoster("pic04.jpg")
                     .build()
             );
 
@@ -122,6 +120,7 @@ public class Application {
                     .thumbnail1("pic01.jpg")
                     .thumbnail2("pic02.jpg")
                     .thumbnail3("pic03.jpg")
+                    .pledgePoster("pic04.jpg")
                     .build()
             );
 
@@ -135,6 +134,7 @@ public class Application {
                     .thumbnail1("pic01.jpg")
                     .thumbnail2("pic02.jpg")
                     .thumbnail3("pic03.jpg")
+                    .pledgePoster("pic04.jpg")
                     .build()
             );
         };

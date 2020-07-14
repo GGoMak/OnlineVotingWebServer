@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>OO 대학교 온라인 투표 시스템</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/css/main.css" />
+		<link rel="stylesheet" href="/css/sub.css"/>
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<header th:include="html/header.html"></header>
+				<!-- Menu -->
+				<section th:include="html/menu.html"></section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">후보자 등록</a></h2>
+									</div>
+									<div class="meta">
+										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
+										<div th:if="${sessionUser}">
+											<time class="published" datetime="2020-07-03">July 3, 2020</time>
+											<a href="#" class="author"><span class="name" style="margin-right: 1px;" th:text="${sessionUser.name}"></span><h3 style="margin-bottom: 0px;">님 환영합니다.</h3><img style="margin-left: 3px;" src="images/avatar.jpg" alt="" /></a>
+										</div>
+									</div>
+								</header>
+
+								<input id="candidate_idx" type="hidden" th:value="${candidate?.idx}"/>
+								<table class="table">
+
+									<tr>
+										<th style="padding: 13px 0 0 15px;">학과선택</th>
+										<td>
+											<div class="pull-left">
+												<select class="form-control imput-sm" id="department" name="department">
+													<option>--학과--</option>
+													<option th:value="computerScience" th:selected="${candidate?.department?.name() == 'computerScience'}">컴퓨터학부</option>
+													<option th:value="philosophy" th:selected="${candidate?.department?.name() == 'philosophy'}">철학과</option>
+													<option th:value="administration" th:selected="${candidate?.department?.name() == 'administration'}">행정학과</option>
+													<option th:value="accounting" th:selected="${candidate?.department?.name() == 'accounting'}">회계학과</option>
+													<option th:value="electronicEngineering" th:selected="${candidate?.department?.name() == 'electronicEngineering'}">전자공학과</option>
+													<option th:value="physics" th:selected="${candidate?.department?.name() == 'physics'}">물리학과</option>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">팀 이름</th>
+										<td><input id="teamName" name="teamName" type="text" class="col-md-1 form-control input-sm" th:value="${candidate?.teamName}"/></td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">정후보</th>
+										<td><input id="input1" placeholder="학번을 입력하세요"><button onclick="javascript:findUser(1)">검색</button>
+											<table id="candidate1">
+												<thead>
+												<th>학번</th>
+												<th>소속</th>
+												<th>이름</th>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">부후보1</th>
+										<td><input id="input2" placeholder="학번을 입력하세요"><button onclick="javascript:findUser(2)">검색</button>
+											<table id="candidate2">
+												<thead>
+												<th>학번</th>
+												<th>소속</th>
+												<th>이름</th>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<th style="padding: 13px 0 0 15px;">부후보2</th>
+										<td><input id="input3" placeholder="학번을 입력하세요"><button onclick="javascript:findUser(3)">검색</button>
+											<table id="candidate3">
+												<thead>
+												<th>학번</th>
+												<th>소속</th>
+												<th>이름</th>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<form id="fileForm" name="fileForm" method="post" enctype="multipart/form-data">
+									<tr>
+										<th>공약 포스터</th>
+										<td><input id="poster_file" name="poster_file" type="file"></td>
+									</tr>
+										<tr>
+											<th>정후보 사진</th>
+											<td><input id="candidate1_file" name="candidate1_file" type="file"></td>
+										</tr>
+										<tr>
+											<th>부후보1 사진</th>
+											<td><input id="candidate2_file" name="candidate2_file" type="file"></td>
+										</tr>
+										<tr>
+											<th>부후보2 사진</th>
+											<td><input id="candidate3_file" name="candidate3_file" type="file"></td>
+										</tr>
+									</form>
+								</table>
+
+								<div class="bottom-button">
+									<div class="pull-left">
+										<button class="btn btn-primary" onclick="history.back()">목록으로</button>
+									</div>
+
+									<div class="pull-right">
+										<button type="submit" onclick="javascript:registCandidate()">후보등록</button>
+									</div>
+								</div>
+							</article>
+					</div>
+
+				<!-- Footer -->
+				<section th:include="html/footer.html"></section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/browser.min.js"></script>
+			<script src="/js/breakpoints.min.js"></script>
+			<script src="/js/util.js"></script>
+			<script src="/js/main.js"></script>
+			<script src="/js/candidate.js"></script>
+
+	</body>
+</html>

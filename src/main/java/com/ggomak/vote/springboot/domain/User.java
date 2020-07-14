@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -63,20 +64,8 @@ public class User implements Serializable {
         this.isVoted = isVoted;
     }
 
-    public void updateCandidate(){
-        this.roleType = RoleType.CANDIDATE;
-    }
-
-    public void updateGuest(){
-        this.roleType = RoleType.GUEST;
-    }
-
-    public void updateVoter(){
-        this.roleType = RoleType.VOTER;
-    }
-
-    public void updateAdmin() {
-        this.roleType = RoleType.ADMIN;
+    public void updateRole(RoleType roleType){
+        this.roleType = roleType;
     }
 
     public void updateisVoted(boolean value) {

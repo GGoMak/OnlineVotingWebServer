@@ -6,6 +6,7 @@ import com.ggomak.vote.springboot.domain.enums.RoleType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,4 +27,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("Select c from User c where c.studentId like %:studentId%")
     Page<User> findAllByStudentId(Pageable pageable, String studentId);
+
+    @Modifying
+    @Query("Update User c set c.roleType = :roleType where c.roleType = 'GUEST'")
+    void updateAllRole(RoleType roleType);
+
+    @Modifying
+    @Query("Update User c set c.roleType = :roleType where c.studentId = :studentId")
+    void updateRole(String studentId, RoleType roleType);
 }

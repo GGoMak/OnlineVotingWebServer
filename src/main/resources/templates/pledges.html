@@ -24,11 +24,11 @@
 								<header>
 									<div class="title">
 										<h2><a href="#" th:text="${pledge.department.getValue()} + ' 선거공약'"></a></h2>
-										<p th:text="${pledge.title}"></p>
+										<p th:text="${pledge.teamName}"></p>
 									</div>
 								</header>
 								<div style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
-									<img th:src="${pledge.posterPath} + ${pledge.posterFileName}">
+									<img th:src="${pledge.imgPath} + ${pledge.pledgePoster}">
 								</div>
 							</article>
 					</div>

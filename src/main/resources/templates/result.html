@@ -29,7 +29,8 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h5><a href="/votelist">후보자 공약보기</a></h5>
+										<h2><a href="#">투표결과</a></h2>
+										<p>투표 기간 XXXX.XX.XX ~ XXXX.XX.XX</p>
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
@@ -39,36 +40,6 @@
 										</div>
 									</div>
 								</header>
-
-								<table style="text-align: center; width: 60%; left:20%; position: relative;">
-									<tbody>
-									<tr th:each="pledge : ${pledgeList}" style="font-size: 1.5em; margin: 20px 0 20px 0;">
-										<td><a th:href="'/pledges?department='+${pledge.department}" target="_blank" th:text="'2020 OO 대학교 ' + ${pledge.department.getValue()} + ' 공약보기'"></a></td>
-									</tr>
-									</tbody>
-								</table>
-
-								<!-- Pagination -->
-								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px">
-									<ul class="pagination" style="margin-top: 9px" th:with="startNumber=${T(Math).floor(pledgeList.number/10)}*10+1, endNumber=(${pledgeList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${pledgeList.totalPages}">
-										<li><a aria-label="Previous" href="/notice?page=1">&laquo;</a></li>
-										<li th:style="${pledgeList.first} ? 'display:none'">
-											<a th:href="@{/pledgelist(page=${pledgeList.number})}">&lsaquo;</a>
-										</li>
-
-										<li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${pledgeList.number}+1) ? 'active'">
-											<a th:href="@{/pledgelist(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
-										</li>
-
-										<li th:style="${pledgeList.last} ? 'display:none'">
-											<a th:href="@{/pledgelist(page=${pledgeList.number}+2)}">&rsaquo;</a>
-										</li>
-										<li><a aria-label="Next" th:href="@{/pledgelist(page=${pledgeList.totalPages})}">&raquo;</a></li>
-									</ul>
-								</nav>
-
-								<button class="voteinfo" style="position: relative; padding: 0; width: 30%; left:35%; font-size: 1.1em" onclick="location.href='/signature'">투표하러가기</button>
-
 							</article>
 					</div>
 

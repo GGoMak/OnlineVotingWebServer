@@ -39,6 +39,9 @@ public class Candidate implements Serializable {
     private String imgPath;
 
     @Column
+    private String pledgePoster;
+
+    @Column
     private String thumbnail1;
 
     @Column
@@ -48,13 +51,14 @@ public class Candidate implements Serializable {
     private String thumbnail3;
 
     @Builder
-    public Candidate(String teamName, Department department, User user1, User user2, User user3, String imgPath, String thumbnail1, String thumbnail2, String thumbnail3){
+    public Candidate(String teamName, Department department, User user1, User user2, User user3, String imgPath, String pledgePoster, String thumbnail1, String thumbnail2, String thumbnail3){
         this.teamName = teamName;
         this.department = department;
         this.candidate1 = user1;
         this.candidate2 = user2;
         this.candidate3 = user3;
         this.imgPath = imgPath;
+        this.pledgePoster = pledgePoster;
         this.thumbnail1 = thumbnail1;
         this.thumbnail2 = thumbnail2;
         this.thumbnail3 = thumbnail3;

@@ -92,8 +92,8 @@ public class IndexController {
 
     // 후보자 리스트(공약보기)
     @GetMapping("/pledgelist")
-    public String voteList(Model model, @LoginUser SessionUser user){
-        model.addAttribute("candidateList", userService.findCandidateListHash());
+    public String voteList(@PageableDefault Pageable pageable, Model model, @LoginUser SessionUser user){
+        model.addAttribute("pledgeList", userService.findCandidateList(pageable));
         model.addAttribute("sessionUser", user);
         return "pledgelist";
     }
@@ -145,8 +145,8 @@ public class IndexController {
 
     // 등록된 후보 리스트
     @GetMapping("/candidatelist")
-    public String registedCandidate(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("candidateList", userService.findCandidateList());
+    public String registedCandidate(@PageableDefault Pageable pageable, Model model, @LoginUser SessionUser user) {
+        model.addAttribute("candidateList", userService.findCandidateList(pageable));
         model.addAttribute("sessionUser", user);
         return "candidatelist";
     }
