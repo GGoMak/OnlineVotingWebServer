@@ -10,9 +10,11 @@ import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.service.UserService;
 import com.ggomak.vote.springboot.service.VoteService;
 import lombok.RequiredArgsConstructor;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
@@ -63,5 +65,10 @@ public class VoteApiController {
         }
 
         return userService.registCandidate(requestDto, pledge, pictureDto);
+    }
+
+    @PostMapping("/api/v3/signature")
+    public Long signature(@LoginUser SessionUser user, @RequestParam("signature_image") MultipartFile image){
+        return userService.regSignature(user, image);
     }
 }

@@ -97,6 +97,11 @@ registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미�
     - WebConfig ResourceHandler 추가
   - 후보자 등록 예외처리 추가
   
+## v1.5.2
+
+  - 전자서명 저장 기능 추가
+    - signiture 폴더 {학번_시간}.jpg로 저장
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정

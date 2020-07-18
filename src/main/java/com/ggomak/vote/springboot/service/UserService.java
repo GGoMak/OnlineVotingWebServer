@@ -5,9 +5,11 @@ import com.ggomak.vote.springboot.domain.User;
 import com.ggomak.vote.springboot.domain.dto.CandidateRegDto;
 import com.ggomak.vote.springboot.domain.dto.UserRoleChangeDTO;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
+import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.repository.CandidateRepository;
 import com.ggomak.vote.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +80,6 @@ public class UserService {
 
     @Transactional
     public Long registCandidate(CandidateRegDto requestDto, MultipartFile poster, ArrayList<MultipartFile> picture){
-
 
         if(!requestDto.getCandidate3().equals("")) {
             candidateRepository.save(Candidate.builder()
@@ -144,5 +146,11 @@ public class UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Long regSignature(SessionUser user, MultipartFile image){
+        fileUpload(image, filePath+"signature/", user.getStudentId() + "_" + LocalDateTime.now());
+
+        return userRepository.findByStudentId(user.getStudentId()).get().getIdx();
     }
 }

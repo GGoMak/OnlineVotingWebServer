@@ -103,6 +103,33 @@ function ev_canvas(ev) {
     }
 }
 
+function onSend() {
+    canvas = document.getElementById('canvas');
+
+    var imgDataUrl = canvas.toDataURL('image/png', 1.0);
+
+    var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+    var array = [];
+    for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    var file = new Blob([new Uint8Array(array)], {type: 'image/png'});	// Blob 생성
+    var formdata = new FormData();	// formData 생성
+    formdata.append("signature_image", file);	// file data 추가
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/v3/signature',
+        data: formdata,
+        processData : false,
+        contentType : false,
+    }).done(function () {
+        window.location.href="/votelist";
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
+}
+
 function onClear() {
     canvas = document.getElementById('canvas');
     context.save();
