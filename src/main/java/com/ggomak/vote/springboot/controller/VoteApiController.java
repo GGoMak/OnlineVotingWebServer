@@ -10,13 +10,16 @@ import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.service.UserService;
 import com.ggomak.vote.springboot.service.VoteService;
 import lombok.RequiredArgsConstructor;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -70,5 +73,27 @@ public class VoteApiController {
     @PostMapping("/api/v3/signature")
     public Long signature(@LoginUser SessionUser user, @RequestParam("signature_image") MultipartFile image){
         return userService.regSignature(user, image);
+    }
+
+    @GetMapping("/api/v3/rtvote")
+    @ResponseBody
+    public List<Integer> getRealTimeVoteResult(){
+        List<Integer> data = voteService.getRealTimeVoteResult();
+
+        return data;
+    }
+
+    @GetMapping("/api/v3/gradevote")
+    public List<Integer> getGradeVoteResult(){
+        List<Integer> data = voteService.getGradeVoteResult();
+
+        return data;
+    }
+
+    @GetMapping("/api/v3/departmentvote/{department}")
+    public List<Integer> getDepartmentVoteResult(@PathVariable Department department) {
+        List<Integer> data = voteService.getDepartmentVoteResult(department);
+
+        return data;
     }
 }

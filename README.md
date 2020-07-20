@@ -100,7 +100,13 @@ registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미�
 ## v1.5.2
 
   - 전자서명 저장 기능 추가
-    - signiture 폴더 {학번_시간}.jpg로 저장
+    - signature 폴더 '학번_시간.jpg'의 형태로 저장
+    
+## v1.6.0
+
+  - 투표결과 페이지 및 api 추가
+    - Google Chart
+    - 시간대별 전체 투표수, 학년별 투표수, 학과별 투표수 열람 가능
   
 ## QA
 
@@ -109,6 +115,7 @@ registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미�
   - 투표하기 페이지 디자인 추후 개선 필요  
   - DB에 유저 IP정보 추가
   - ~~Image 업로드 시 접근 문제 발생~~
+  - 투표결과 조회를 위한 DB 설계 정리 필요
   
 ## 출처
 

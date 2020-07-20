@@ -1,6 +1,7 @@
 package com.ggomak.vote.springboot.repository;
 
 import com.ggomak.vote.springboot.domain.User;
+import com.ggomak.vote.springboot.domain.Vote;
 import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
 import org.springframework.data.domain.Page;
@@ -35,4 +36,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("Update User c set c.roleType = :roleType where c.studentId = :studentId")
     void updateRole(String studentId, RoleType roleType);
+
+    List<User> findAllByGrade(Long grade);
 }

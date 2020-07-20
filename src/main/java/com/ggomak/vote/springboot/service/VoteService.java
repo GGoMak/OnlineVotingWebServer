@@ -68,4 +68,65 @@ public class VoteService {
     protected String getRemoteAddr(HttpServletRequest request){
         return (null != request.getHeader("X-FORWARDED-FOR")) ? request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
     }
+
+    public ArrayList<Integer> getRealTimeVoteResult() {
+
+        ArrayList<Integer> result = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.of(2020, 7, 3, 18, 0, 0);
+        LocalDateTime time = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 9, 00, 00);
+
+        for (LocalDateTime i = time; i.isBefore(now); i = i.plusHours(1)) {
+            try {
+                List<Vote> vote = voteRepository.findAllByVoteTimeBetween(i, i.plusHours(1));
+                result.add(vote.size());
+            } catch (Exception e){
+                continue;
+            }
+        }
+
+        return result;
+    }
+
+    public ArrayList<Integer> getGradeVoteResult() {
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++){
+            List<User> vote = userRepository.findAllByGrade(Long.valueOf(i));
+            int count = 0;
+
+            for(int j = 0; j < vote.size(); j++){
+                if(vote.get(j).isVoted()){
+                    count++;
+                }
+            }
+
+            result.add(count);
+        }
+        return result;
+    }
+
+    public ArrayList<Integer> getDepartmentVoteResult(Department department) {
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        List<Vote> vote = voteRepository.findAll();
+        int voteCount = 0;
+        int departmentCount = 0;
+
+        for(int i = 0; i < vote.size(); i++){
+            if(vote.get(i).getCandidate().getDepartment() == department){
+                if(vote.get(i).isOpposite()){
+                    voteCount++;
+                }
+                departmentCount++;
+            }
+        }
+
+        result.add(voteCount);
+        result.add(departmentCount - voteCount);
+
+        return result;
+
+    }
 }

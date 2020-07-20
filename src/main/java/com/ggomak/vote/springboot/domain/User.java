@@ -36,6 +36,9 @@ public class User implements Serializable {
     private String dateOfBirth;
 
     @Column
+    private Long grade;
+
+    @Column
     private String phoneNumber;
 
     @Column
@@ -52,11 +55,12 @@ public class User implements Serializable {
     private boolean isVoted;
 
     @Builder
-    public User(String name, String studentId, Department department, String dateOfBirth, String phoneNumber, String password, LocalDateTime lastLoginTime, RoleType roleType, boolean isVoted){
+    public User(String name, String studentId, Department department, String dateOfBirth, Long grade, String phoneNumber, String password, LocalDateTime lastLoginTime, RoleType roleType, boolean isVoted){
         this.name = name;
         this.studentId = studentId;
         this.department = department;
         this.dateOfBirth = dateOfBirth;
+        this.grade = grade;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.lastLoginTime = lastLoginTime;

@@ -3,6 +3,7 @@ package com.ggomak.vote.springboot;
 import com.ggomak.vote.springboot.domain.Board;
 import com.ggomak.vote.springboot.domain.Candidate;
 import com.ggomak.vote.springboot.domain.User;
+import com.ggomak.vote.springboot.domain.Vote;
 import com.ggomak.vote.springboot.domain.enums.BoardType;
 import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
@@ -30,6 +31,7 @@ public class Application {
                     .studentId("20150000")
                     .department(Department.computerScience)
                     .dateOfBirth("960000")
+                    .grade(Long.parseLong("4"))
                     .phoneNumber("010-1234-5678")
                     .password("{noop}123")
                     .lastLoginTime(LocalDateTime.now())
@@ -43,11 +45,12 @@ public class Application {
                             .studentId("2015001" + index)
                             .department(Department.computerScience)
                             .dateOfBirth("960000")
+                            .grade(Long.parseLong("1"))
                             .phoneNumber("123-123-123")
                             .password("{noop}123")
                             .lastLoginTime(LocalDateTime.now())
                             .roleType(RoleType.GUEST)
-                            .isVoted(false)
+                            .isVoted(true)
                             .build()));
 
             IntStream.rangeClosed(1, 9).forEach(index ->
@@ -56,11 +59,12 @@ public class Application {
                             .studentId("2015002" + index)
                             .department(Department.philosophy)
                             .dateOfBirth("960000")
+                            .grade(Long.parseLong("2"))
                             .phoneNumber("123-123-123")
                             .password("{noop}123")
                             .lastLoginTime(LocalDateTime.now())
                             .roleType(RoleType.GUEST)
-                            .isVoted(false)
+                            .isVoted(true)
                             .build()));
 
             IntStream.rangeClosed(1, 9).forEach(index ->
@@ -69,6 +73,7 @@ public class Application {
                             .studentId("2015003" + index)
                             .department(Department.accounting)
                             .dateOfBirth("960000")
+                            .grade(Long.parseLong("3"))
                             .phoneNumber("123-123-123")
                             .password("{noop}123")
                             .lastLoginTime(LocalDateTime.now())
@@ -131,12 +136,35 @@ public class Application {
                     .user2(userRepository.findById(Long.valueOf(21)).get())
                     .user3(userRepository.findById(Long.valueOf(22)).get())
                     .imgPath("/Users/ggomak/Desktop/VoteImgDir/")
-                    .thumbnail1("TESTTEAM1_20150031.jpg")
-                    .thumbnail2("TESTTEAM1_20150032.jpg")
-                    .thumbnail3("TESTTEAM1_20150033.jpg")
+                    .thumbnail1("TESTTEAM3_20150031.jpg")
+                    .thumbnail2("TESTTEAM3_20150032.jpg")
+                    .thumbnail3("TESTTEAM3_20150033.jpg")
                     .pledgePoster("Pledge_TESTTEAM3.jpg")
                     .build()
             );
+
+            IntStream.rangeClosed(1, 9).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                    .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                    .opposite(true)
+                    .voteTime(LocalDateTime.of(2020, 7, 3, 9, 10, 10))
+                    .build()
+            ));
+
+            IntStream.rangeClosed(1, 20).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .opposite(true)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 10, 10, 10))
+                            .build()
+                    ));
+            IntStream.rangeClosed(1, 15).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .opposite(false)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 11, 10, 10))
+                            .build()
+                    ));
         };
     }
 }

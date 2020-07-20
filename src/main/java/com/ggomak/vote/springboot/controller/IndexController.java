@@ -138,7 +138,8 @@ public class IndexController {
 
     // 투표결과
     @GetMapping("/result")
-    public String result(Model model, @LoginUser SessionUser user){
+    public String result(Model model, @LoginUser SessionUser user, @PageableDefault Pageable pageable){
+        model.addAttribute("", userService.findCandidateList(pageable));
         model.addAttribute("sessionUser", user);
         return "result";
     }
