@@ -9,22 +9,17 @@ import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.repository.CandidateRepository;
 import com.ggomak.vote.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +31,7 @@ public class UserService {
 
     // User list 출력
     public Page<User> findUserList(Pageable pageable, String type, String value) {
+
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(), Sort.by("idx").descending());
 
         switch(type) {
@@ -79,6 +75,11 @@ public class UserService {
     }
 
     @Transactional
+    public void updateIsVoted(String studentId){
+        userRepository.updateIsVoted(studentId);
+    }
+
+    @Transactional
     public Long registCandidate(CandidateRegDto requestDto, MultipartFile poster, ArrayList<MultipartFile> picture){
 
         if(!requestDto.getCandidate3().equals("")) {
@@ -90,8 +91,8 @@ public class UserService {
                     .user3(userRepository.findByStudentId(requestDto.getCandidate3()).get())
                     .imgPath(filePath)
                     .thumbnail1(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
-                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
-                    .thumbnail3(requestDto.getTeamName() + '_' + requestDto.getCandidate1() + ".jpg")
+                    .thumbnail2(requestDto.getTeamName() + '_' + requestDto.getCandidate2() + ".jpg")
+                    .thumbnail3(requestDto.getTeamName() + '_' + requestDto.getCandidate3() + ".jpg")
                     .pledgePoster("Pledge_" + requestDto.getTeamName() + ".jpg")
                     .build()
             );

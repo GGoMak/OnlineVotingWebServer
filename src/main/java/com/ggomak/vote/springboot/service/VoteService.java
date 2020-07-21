@@ -87,20 +87,12 @@ public class VoteService {
         return result;
     }
 
-    public ArrayList<Integer> getGradeVoteResult() {
+    public ArrayList<Long> getGradeVoteResult() {
 
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Long> result = new ArrayList<>();
 
-        for(int i = 0; i < 4; i++){
-            List<User> vote = userRepository.findAllByGrade(Long.valueOf(i));
-            int count = 0;
-
-            for(int j = 0; j < vote.size(); j++){
-                if(vote.get(j).isVoted()){
-                    count++;
-                }
-            }
-
+        for(int i = 1; i <= 4; i++){
+            long count = userRepository.countByVoted(Long.valueOf(i));
             result.add(count);
         }
         return result;

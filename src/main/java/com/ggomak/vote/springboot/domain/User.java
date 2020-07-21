@@ -47,6 +47,9 @@ public class User implements Serializable {
     @Column
     private LocalDateTime lastLoginTime;
 
+    @Column
+    private String lastLoginIpAddress;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoleType roleType;
@@ -55,7 +58,7 @@ public class User implements Serializable {
     private boolean isVoted;
 
     @Builder
-    public User(String name, String studentId, Department department, String dateOfBirth, Long grade, String phoneNumber, String password, LocalDateTime lastLoginTime, RoleType roleType, boolean isVoted){
+    public User(String name, String studentId, Department department, String dateOfBirth, Long grade, String phoneNumber, String password, LocalDateTime lastLoginTime, String lastLoginIpAddress, RoleType roleType, boolean isVoted){
         this.name = name;
         this.studentId = studentId;
         this.department = department;
@@ -64,6 +67,7 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.lastLoginTime = lastLoginTime;
+        this.lastLoginIpAddress = lastLoginIpAddress;
         this.roleType = roleType;
         this.isVoted = isVoted;
     }

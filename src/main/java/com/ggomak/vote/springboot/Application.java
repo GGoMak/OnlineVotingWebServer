@@ -8,6 +8,7 @@ import com.ggomak.vote.springboot.domain.enums.BoardType;
 import com.ggomak.vote.springboot.domain.enums.Department;
 import com.ggomak.vote.springboot.domain.enums.RoleType;
 import com.ggomak.vote.springboot.repository.*;
+import com.ggomak.vote.springboot.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +24,7 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner runner(BoardRepository boardRepository, UserRepository userRepository, CandidateRepository candidateRepository, VoteRepository voteRepository){
+    public CommandLineRunner runner(UserService userService, BoardRepository boardRepository, UserRepository userRepository, CandidateRepository candidateRepository, VoteRepository voteRepository){
         return args -> {
 
             User admin = userRepository.save(User.builder()
@@ -39,47 +40,311 @@ public class Application {
                     .build()
             );
 
-            IntStream.rangeClosed(1, 9).forEach(index ->
-                    userRepository.save(User.builder()
-                            .name("컴학" + index)
-                            .studentId("2015001" + index)
-                            .department(Department.computerScience)
-                            .dateOfBirth("960000")
-                            .grade(Long.parseLong("1"))
-                            .phoneNumber("123-123-123")
-                            .password("{noop}123")
-                            .lastLoginTime(LocalDateTime.now())
-                            .roleType(RoleType.GUEST)
-                            .isVoted(true)
-                            .build()));
+            for(int i = 10; i < 30; i++){
+                userRepository.save(User.builder()
+                        .name("컴학" + Integer.toString(i-9))
+                        .studentId("201500" + i)
+                        .department(Department.computerScience)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("컴학" + Integer.toString(i-9))
+                        .studentId("201600" + i)
+                        .department(Department.computerScience)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("컴학" + Integer.toString(i-9))
+                        .studentId("201700" + i)
+                        .department(Department.computerScience)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("컴학" + Integer.toString(i-9))
+                        .studentId("201800" + i)
+                        .department(Department.computerScience)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
 
-            IntStream.rangeClosed(1, 9).forEach(index ->
-                    userRepository.save(User.builder()
-                            .name("철학" + index)
-                            .studentId("2015002" + index)
-                            .department(Department.philosophy)
-                            .dateOfBirth("960000")
-                            .grade(Long.parseLong("2"))
-                            .phoneNumber("123-123-123")
-                            .password("{noop}123")
-                            .lastLoginTime(LocalDateTime.now())
-                            .roleType(RoleType.GUEST)
-                            .isVoted(true)
-                            .build()));
+            for(int i = 30; i < 60; i++){
+                userRepository.save(User.builder()
+                        .name("철학" + Integer.toString(i-29))
+                        .studentId("201500" + i)
+                        .department(Department.philosophy)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("철학" + Integer.toString(i-29))
+                        .studentId("201600" + i)
+                        .department(Department.philosophy)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("철학" + Integer.toString(i-29))
+                        .studentId("201700" + i)
+                        .department(Department.philosophy)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("철학" + Integer.toString(i-29))
+                        .studentId("201800" + i)
+                        .department(Department.philosophy)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
 
-            IntStream.rangeClosed(1, 9).forEach(index ->
-                    userRepository.save(User.builder()
-                            .name("회계" + index)
-                            .studentId("2015003" + index)
-                            .department(Department.accounting)
-                            .dateOfBirth("960000")
-                            .grade(Long.parseLong("3"))
-                            .phoneNumber("123-123-123")
-                            .password("{noop}123")
-                            .lastLoginTime(LocalDateTime.now())
-                            .roleType(RoleType.GUEST)
-                            .isVoted(false)
-                            .build()));
+            for(int i = 60; i < 100; i++){
+                userRepository.save(User.builder()
+                        .name("행정" + Integer.toString(i-59))
+                        .studentId("201500" + i)
+                        .department(Department.administration)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("행정" + Integer.toString(i-59))
+                        .studentId("201600" + i)
+                        .department(Department.administration)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("행정" + Integer.toString(i-59))
+                        .studentId("201700" + i)
+                        .department(Department.administration)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("행정" + Integer.toString(i-59))
+                        .studentId("201800" + i)
+                        .department(Department.administration)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
+
+            for(int i = 100; i < 120; i++){
+                userRepository.save(User.builder()
+                        .name("회계" + Integer.toString(i-99))
+                        .studentId("20150" + i)
+                        .department(Department.accounting)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("회계" + Integer.toString(i-99))
+                        .studentId("20160" + i)
+                        .department(Department.accounting)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("회계" + Integer.toString(i-99))
+                        .studentId("20170" + i)
+                        .department(Department.accounting)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("회계" + Integer.toString(i-99))
+                        .studentId("20180" + i)
+                        .department(Department.accounting)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
+
+            for(int i = 120; i < 150; i++){
+                userRepository.save(User.builder()
+                        .name("전자" + Integer.toString(i-119))
+                        .studentId("20150" + i)
+                        .department(Department.electronicEngineering)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("전자" + Integer.toString(i-119))
+                        .studentId("20160" + i)
+                        .department(Department.electronicEngineering)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("전자" + Integer.toString(i-119))
+                        .studentId("20170" + i)
+                        .department(Department.electronicEngineering)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("전자" + Integer.toString(i-119))
+                        .studentId("20180" + i)
+                        .department(Department.electronicEngineering)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
+
+            for(int i = 150; i < 180; i++){
+                userRepository.save(User.builder()
+                        .name("물리" + Integer.toString(i-149))
+                        .studentId("20150" + i)
+                        .department(Department.physics)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("4"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("물리" + Integer.toString(i-149))
+                        .studentId("20160" + i)
+                        .department(Department.physics)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("3"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("물리" + Integer.toString(i-149))
+                        .studentId("20170" + i)
+                        .department(Department.physics)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("2"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+                userRepository.save(User.builder()
+                        .name("물리" + Integer.toString(i-149))
+                        .studentId("20180" + i)
+                        .department(Department.physics)
+                        .dateOfBirth("960000")
+                        .grade(Long.parseLong("1"))
+                        .phoneNumber("123-123-123")
+                        .password("{noop}123")
+                        .lastLoginTime(LocalDateTime.now())
+                        .roleType(RoleType.GUEST)
+                        .isVoted(false)
+                        .build());
+            }
 
             IntStream.rangeClosed(1, 20).forEach(index ->
                     boardRepository.save(Board.builder()
@@ -143,7 +408,49 @@ public class Application {
                     .build()
             );
 
-            IntStream.rangeClosed(1, 9).forEach(index ->
+            for(int i = 10; i < 14; i++){
+                userService.updateIsVoted("201800" + i);
+                userService.updateIsVoted("201700" + i);
+                userService.updateIsVoted("201600" + i);
+                userService.updateIsVoted("201500" + i);
+            }
+
+            for(int i = 14; i < 16; i++){
+                userService.updateIsVoted("201800" + i);
+                userService.updateIsVoted("201700" + i);
+                userService.updateIsVoted("201600" + i);
+                userService.updateIsVoted("201500" + i);
+            }
+
+            for(int i = 30; i < 34; i++){
+                userService.updateIsVoted("201800" + i);
+                userService.updateIsVoted("201700" + i);
+                userService.updateIsVoted("201600" + i);
+                userService.updateIsVoted("201500" + i);
+            }
+
+            for(int i = 34; i < 36; i++){
+                userService.updateIsVoted("201800" + i);
+                userService.updateIsVoted("201700" + i);
+                userService.updateIsVoted("201600" + i);
+                userService.updateIsVoted("201500" + i);
+            }
+
+            for(int i = 100; i < 104; i++){
+                userService.updateIsVoted("20180" + i);
+                userService.updateIsVoted("20170" + i);
+                userService.updateIsVoted("20160" + i);
+                userService.updateIsVoted("20150" + i);
+            }
+
+            for(int i = 104; i < 106; i++){
+                userService.updateIsVoted("20180" + i);
+                userService.updateIsVoted("20170" + i);
+                userService.updateIsVoted("20160" + i);
+                userService.updateIsVoted("20150" + i);
+            }
+
+            IntStream.rangeClosed(1, 8).forEach(index ->
                     voteRepository.save(Vote.builder()
                     .candidate(candidateRepository.findById(Long.parseLong("1")).get())
                     .opposite(true)
@@ -151,18 +458,75 @@ public class Application {
                     .build()
             ));
 
-            IntStream.rangeClosed(1, 20).forEach(index ->
+            IntStream.rangeClosed(1, 8).forEach(index ->
                     voteRepository.save(Vote.builder()
                             .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .opposite(true)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 11, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 4).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .opposite(false)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 9, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 4).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .opposite(false)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 12, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 7).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("2")).get())
                             .opposite(true)
                             .voteTime(LocalDateTime.of(2020, 7, 3, 10, 10, 10))
                             .build()
                     ));
-            IntStream.rangeClosed(1, 15).forEach(index ->
+
+            IntStream.rangeClosed(1, 9).forEach(index ->
                     voteRepository.save(Vote.builder()
-                            .candidate(candidateRepository.findById(Long.parseLong("1")).get())
+                            .candidate(candidateRepository.findById(Long.parseLong("2")).get())
+                            .opposite(true)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 14, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 8).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("2")).get())
                             .opposite(false)
-                            .voteTime(LocalDateTime.of(2020, 7, 3, 11, 10, 10))
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 9, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 5).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("3")).get())
+                            .opposite(true)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 13, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 11).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("3")).get())
+                            .opposite(true)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 15, 10, 10))
+                            .build()
+                    ));
+
+            IntStream.rangeClosed(1, 8).forEach(index ->
+                    voteRepository.save(Vote.builder()
+                            .candidate(candidateRepository.findById(Long.parseLong("3")).get())
+                            .opposite(false)
+                            .voteTime(LocalDateTime.of(2020, 7, 3, 16, 10, 10))
                             .build()
                     ));
         };

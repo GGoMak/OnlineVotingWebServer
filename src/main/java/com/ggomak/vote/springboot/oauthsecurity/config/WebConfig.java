@@ -23,4 +23,5 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("file:////Users/ggomak/Desktop/VoteImgDir/").setCachePeriod(0);
     }
+
 }

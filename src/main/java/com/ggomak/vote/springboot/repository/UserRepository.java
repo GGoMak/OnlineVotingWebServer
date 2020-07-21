@@ -37,5 +37,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("Update User c set c.roleType = :roleType where c.studentId = :studentId")
     void updateRole(String studentId, RoleType roleType);
 
-    List<User> findAllByGrade(Long grade);
+    @Modifying
+    @Query("Update User c set c.isVoted = true where c.studentId = :studentId")
+    void updateIsVoted(String studentId);
+
+    @Query("select count(c) from User c where c.grade = :grade and c.isVoted = true")
+    long countByVoted(Long grade);
 }

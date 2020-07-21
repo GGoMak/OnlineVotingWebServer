@@ -63,7 +63,8 @@
 									<tr>
 										<th class="col-3">#</th>
 										<th class="col-3">소속</th>
-										<th class="col-2">학번</th>
+										<th class="col-1">학번</th>
+										<th class="col-1">학년</th>
 										<th class="col-2">이름</th>
 										<th class="col-1">역할</th>
 									</tr>
@@ -73,6 +74,7 @@
 										<td th:text="${user.idx}"></td>
 										<td th:text="${user.department.getValue()}"></td>
 										<td th:text="${user.studentId}"></td>
+										<td th:text="${user.grade} + '학년'"></td>
 										<td th:text="${user.name}"></td>
 										<td>
 										<select id="user_type" name="user_type" style="width: 150px; padding-right: 0">
@@ -89,7 +91,7 @@
 								<!-- Pagination -->
 								<nav aria-label="Page navigation" style="text-align: center; margin-left: 40px;">
 									<ul class="pagination" style="margin-top: 9px" th:with="startNumber=${T(Math).floor(userList.number/10)}*10+1, endNumber=(${userList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${userList.totalPages}">
-										<li><a aria-label="Previous" href="/notice?page=1">&laquo;</a></li>
+										<li><a aria-label="Previous" href="/userinfo?page=1">&laquo;</a></li>
 										<li th:style="${userList.first} ? 'display:none'">
 											<a th:href="@{/userinfo(page=${userList.number})}">&lsaquo;</a>
 										</li>

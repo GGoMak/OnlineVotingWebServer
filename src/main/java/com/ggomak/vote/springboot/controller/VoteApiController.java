@@ -84,8 +84,8 @@ public class VoteApiController {
     }
 
     @GetMapping("/api/v3/gradevote")
-    public List<Integer> getGradeVoteResult(){
-        List<Integer> data = voteService.getGradeVoteResult();
+    public List<Long> getGradeVoteResult(){
+        List<Long> data = voteService.getGradeVoteResult();
 
         return data;
     }

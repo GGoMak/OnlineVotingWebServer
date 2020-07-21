@@ -1,6 +1,8 @@
 # Online Voting System
 
   - Java Spring을 기반으로 하는 온라인 투표 웹 구현
+  - 대학교 학생회 투표를 목적으로 제작되었으며 학과별, 한 후보에 대해 투표를 진행하는 방식으로 구현되었습니다.
+  후보가 여럿일 경우에 대한 경우는 추후에 추가구현 예정입니다.
   
 ## 실행 방법
 
@@ -19,7 +21,7 @@ java -jar Vote-1.0-SNAPSHOT.jar
 
   - 테스트용 유저ID
 ```$xslt
-학번 : 20150010 ~ 20150039
+학번 : 20150010 ~ 20150179 | 20160010 ~ 20160179 | 20170010 ~ 20170179 | 20180010 ~ 20180179
 패스워드 : 123
 ```
 
@@ -29,6 +31,11 @@ java -jar Vote-1.0-SNAPSHOT.jar
 ```$xslt
 registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미지 폴더 경로}").setCachePeriod(0);
 ```
+
+  - src/main/java/com/ggomak/vote/springboot/service/UserService.java에서 filePath 경로 지정
+```$xslt
+private String filePath = "{이미지 폴더 경로}";
+```  
 
 ## v1.0
 
@@ -107,6 +114,14 @@ registry.addResourceHandler("/images/**").addResourceLocations("file:///{이미�
   - 투표결과 페이지 및 api 추가
     - Google Chart
     - 시간대별 전체 투표수, 학년별 투표수, 학과별 투표수 열람 가능
+    
+## v1.6.1
+
+  - 테스트용 데이터 추가 생성
+    - 유저 학년별로 180명씩 생성
+    - 후보는 컴퓨터학부, 철학과, 회계학과에서 한 팀씩 총 3팀
+    - 투표는 학년별로 18명씩 총 72명 진행
+    - 학과별로는 총 24명 진행(16명 찬성, 8명 반대)
   
 ## QA
 

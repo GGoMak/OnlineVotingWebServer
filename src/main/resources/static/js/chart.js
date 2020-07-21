@@ -77,6 +77,8 @@ function drawChart2() {
         data2.addColumn('string', '학년');
         data2.addColumn('number', '투표수');
 
+        console.log(receiveData);
+
         var data = ["1학년", receiveData[0]];
         data2.addRow(data);
         data = ["2학년", receiveData[1]];
