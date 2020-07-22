@@ -90,9 +90,15 @@ public class VoteApiController {
         return data;
     }
 
-    @GetMapping("/api/v3/departmentvote/{department}")
-    public List<Integer> getDepartmentVoteResult(@PathVariable Department department) {
-        List<Integer> data = voteService.getDepartmentVoteResult(department);
+    @GetMapping("/api/v3/departmentvote")
+    public Map<Department, Long> getDepartmentVote(){
+        Map<Department, Long> data = voteService.getDepartmentVoteResult();
+        return data;
+    }
+
+    @GetMapping("/api/v3/result/{department}")
+    public List<Integer> getVoteResult(@PathVariable Department department) {
+        List<Integer> data = voteService.getVoteResult(department);
 
         return data;
     }

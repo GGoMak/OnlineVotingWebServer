@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -72,13 +74,15 @@ public class VoteService {
     public ArrayList<Integer> getRealTimeVoteResult() {
 
         ArrayList<Integer> result = new ArrayList<>();
+
         LocalDateTime now = LocalDateTime.of(2020, 7, 3, 18, 0, 0);
         LocalDateTime time = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 9, 00, 00);
 
-        for (LocalDateTime i = time; i.isBefore(now); i = i.plusHours(1)) {
+        for (LocalDateTime i = time.plusHours(1); i.isBefore(now); i = i.plusHours(1)) {
             try {
-                List<Vote> vote = voteRepository.findAllByVoteTimeBetween(i, i.plusHours(1));
-                result.add(vote.size());
+                long voteCount = voteRepository.countByBetweenVoteTime(time, i);
+                long allCount = userRepository.countAll();
+                result.add((int)((double)voteCount/(double)allCount * 100));
             } catch (Exception e){
                 continue;
             }
@@ -93,30 +97,50 @@ public class VoteService {
 
         for(int i = 1; i <= 4; i++){
             long count = userRepository.countByVoted(Long.valueOf(i));
-            result.add(count);
+            long allCount = userRepository.countByGrade(Long.valueOf(i));
+            result.add((long)((double)count/(double)allCount * 100));
         }
         return result;
     }
 
-    public ArrayList<Integer> getDepartmentVoteResult(Department department) {
+    public Map<Department, Long> getDepartmentVoteResult() {
+        long count, allCount;
+        Map<Department, Long> data = new HashMap<>();
+
+        /* 효율적인 코드 수정 필요 */
+        count = voteRepository.countByDepartment(Department.computerScience);
+        allCount = userRepository.countByDepartment(Department.computerScience);
+        data.put(Department.computerScience, (long)((double)count/(double)allCount * 100));
+        count = voteRepository.countByDepartment(Department.accounting);
+        allCount = userRepository.countByDepartment(Department.accounting);
+        data.put(Department.accounting, (long)((double)count/(double)allCount * 100));
+        count = voteRepository.countByDepartment(Department.administration);
+        allCount = userRepository.countByDepartment(Department.administration);
+        data.put(Department.administration, (long)((double)count/(double)allCount * 100));
+        count = voteRepository.countByDepartment(Department.philosophy);
+        allCount = userRepository.countByDepartment(Department.philosophy);
+        data.put(Department.philosophy, (long)((double)count/(double)allCount * 100));
+        count = voteRepository.countByDepartment(Department.electronicEngineering);
+        allCount = userRepository.countByDepartment(Department.electronicEngineering);
+        data.put(Department.electronicEngineering, (long)((double)count/(double)allCount * 100));
+        count = voteRepository.countByDepartment(Department.physics);
+        allCount = userRepository.countByDepartment(Department.physics);
+        data.put(Department.physics, (long)((double)count/(double)allCount * 100));
+
+        return data;
+    }
+
+    public ArrayList<Integer> getVoteResult(Department department) {
 
         ArrayList<Integer> result = new ArrayList<>();
 
-        List<Vote> vote = voteRepository.findAll();
-        int voteCount = 0;
-        int departmentCount = 0;
+        long allCount = userRepository.countByDepartment(department);
+        long agreeCount = voteRepository.countByVotedDepartment(department);
+        long disagreeCount = voteRepository.countByNotVotedDepartment(department);
 
-        for(int i = 0; i < vote.size(); i++){
-            if(vote.get(i).getCandidate().getDepartment() == department){
-                if(vote.get(i).isOpposite()){
-                    voteCount++;
-                }
-                departmentCount++;
-            }
-        }
-
-        result.add(voteCount);
-        result.add(departmentCount - voteCount);
+        result.add((int)agreeCount);
+        result.add((int)disagreeCount);
+        result.add((int)(allCount - agreeCount - disagreeCount));
 
         return result;
 

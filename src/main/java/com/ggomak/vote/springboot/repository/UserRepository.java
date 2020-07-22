@@ -43,4 +43,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select count(c) from User c where c.grade = :grade and c.isVoted = true")
     long countByVoted(Long grade);
+
+    @Query("select count(c) from User c where c.roleType = 'GUEST'")
+    long countAll();
+
+    @Query("select count(c) from User c where c.grade = :grade")
+    long countByGrade(Long grade);
+
+    @Query("select count(c) from User c where c.department = :department and c.roleType = 'GUEST'")
+    long countByDepartment(Department department);
 }

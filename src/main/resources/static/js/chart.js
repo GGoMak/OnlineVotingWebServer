@@ -13,7 +13,7 @@ function drawChart1() {
         var data1 = new google.visualization.DataTable();
         var dataRow = [];
         data1.addColumn('datetime' , '시간');
-        data1.addColumn('number'   , '투표수');
+        data1.addColumn('number'   , '투표율');
 
         var hours = 9;
 
@@ -75,9 +75,7 @@ function drawChart2() {
         // Create the data table.
         var data2 = new google.visualization.DataTable();
         data2.addColumn('string', '학년');
-        data2.addColumn('number', '투표수');
-
-        console.log(receiveData);
+        data2.addColumn('number', '투표율');
 
         var data = ["1학년", receiveData[0]];
         data2.addRow(data);
@@ -89,13 +87,22 @@ function drawChart2() {
         data2.addRow(data);
 
         // Set chart options
-        var options2 = {'title':'학년별 투표수',
-            'height' : 400,
-            'pieHole': 0.4};
+        var options2 = {
+            title: '학년별 투표율',
+            isStacked: 'percent',
+            focusTarget: 'category',
+            height: 400,
+            width: '100%',
+            legend: {position: "top", textStyle: {fontSize: 13}},
+            pointSize: 5,
+            tooltip: {textStyle: {fontSize: 12}, showColorCode: true, trigger: 'both'},
+            vAxis: {minValue: 100, viewWindow: {min: 0}, textStyle: {fontSize: 12}},
+            animation: {startup: true, duration: 1000, easing: 'in'},
+        };
 
         // Instantiate and draw our chart, passing in some options.
 
-        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
         chart2.draw(data2, options2);
 
     }).fail(function (error) {
@@ -105,31 +112,86 @@ function drawChart2() {
 
 function drawChart3() {
 
+    var chartLineCount    = 10;
+
     $.ajax({
         type: 'GET',
-        url: '/api/v3/departmentvote/' + $('#sessionUser').val()
+        url: '/api/v3/departmentvote',
     }).done(function (receiveData) {
         var data3 = new google.visualization.DataTable();
-        data3.addColumn('string', '결과');
-        data3.addColumn('number', '투표수');
+        data3.addColumn('string', '학과');
+        data3.addColumn('number', '투표율');
+
+        var data = ["회계학과", receiveData.accounting];
+        data3.addRow(data);
+        data = ["행정학과", receiveData.administration];
+        data3.addRow(data);
+        data = ["컴퓨터학부", receiveData.computerScience];
+        data3.addRow(data);
+        data = ["전자공학과", receiveData.electronicEngineering];
+        data3.addRow(data);
+        data = ["철학과", receiveData.philosophy];
+        data3.addRow(data);
+        data = ["물리학과", receiveData.physics];
+        data3.addRow(data);
+
+        var options3 = {
+            title: '학과별 투표율',
+            isStacked: 'percent',
+            focusTarget: 'category',
+            height: 400,
+            width: '100%',
+            legend: {position: "top", textStyle: {fontSize: 13}},
+            pointSize: 5,
+            tooltip: {textStyle: {fontSize: 12}, showColorCode: true, trigger: 'both'},
+            vAxis: {minValue: 100, viewWindow: {min: 0}, textStyle: {fontSize: 12}},
+            animation: {startup: true, duration: 1000, easing: 'in'},
+        };
+
+        var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
+        chart3.draw(data3, options3);
+
+    }).fail(function (error){
+        alert(JSON.stringify(error));
+    })
+}
+
+function drawChart4() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/v3/result/' + department,
+    }).done(function (receiveData) {
+        var data4 = new google.visualization.DataTable();
+        data4.addColumn('string', '학과');
+        data4.addColumn('number', '결과');
 
         var data = ["찬성", receiveData[0]];
         data3.addRow(data);
         data = ["반대", receiveData[1]];
         data3.addRow(data);
+        data = ["미투표", receiveData[2]];
+        data3.addRow(data);
 
-        // Set chart options
-        var options3 = {'title': $('#sessionUser').val() + " 결과",
-            'height' : 400};
+        var options4 = {
+            title: '투표결과',
+            isStacked: 'percent',
+            focusTarget: 'category',
+            height: 400,
+            width: '100%',
+            legend: {position: "top", textStyle: {fontSize: 13}},
+            pointSize: 5,
+            tooltip: {textStyle: {fontSize: 12}, showColorCode: true, trigger: 'both'},
+            vAxis: {minValue: 100, viewWindow: {min: 0}, textStyle: {fontSize: 12}},
+            animation: {startup: true, duration: 1000, easing: 'in'},
+        };
 
-        // Instantiate and draw our chart, passing in some options.
+        var chart4 = new google.visualization.PieChart(document.getElementById('chart_div4'));
+        chart4.draw(data4, options4);
 
-        var chart3 = new google.visualization.PieChart(document.getElementById('chart_div3'));
-        chart3.draw(data3, options3);
-
-    }).fail(function (error) {
-        JSON.stringify(error);
-    });
+    }).fail(function (error){
+        alert(JSON.stringify(error));
+    })
 }
 
 google.charts.load('current', {packages: ['corechart']});
