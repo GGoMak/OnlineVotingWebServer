@@ -1,0 +1,11 @@
+<div th:if="${sessionUser}">
+    <time id="published" class="published" datetime="2020-07-03">July 3, 2020</time>
+    <script>
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        document.getElementById('published').innerText = year + '년 ' + month + '월 ' + day + '일';
+    </script>
+    <a href="#" class="author"><span class="name" style="margin-right: 1px;" th:text="${sessionUser.name}"></span><h3 style="margin-bottom: 0px;">님 환영합니다.</h3><img style="margin-left: 3px;" src="images/avatar.jpg" alt="" /></a>
+</div>

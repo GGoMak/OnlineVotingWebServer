@@ -34,10 +34,7 @@
 									</div>
 									<div class="meta">
 										<a href="/login" class="button large fit" th:if="!${sessionUser}" style="font-size: 0.7em; margin-top: 10px">로그인 하기</a>
-										<div th:if="${sessionUser}">
-											<time class="published" datetime="2020-07-03">July 3, 2020</time>
-											<a href="#" class="author"><span class="name" style="margin-right: 1px;" th:text="${sessionUser.name}"></span><h3 style="margin-bottom: 0px;">님 환영합니다.</h3><img style="margin-left: 3px;" src="images/avatar.jpg" alt="" /></a>
-										</div>
+										<div th:include="html/loginheader.html"></div>
 									</div>
 								</header>
 								<div class="voteinfo">

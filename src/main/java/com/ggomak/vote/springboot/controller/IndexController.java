@@ -2,6 +2,7 @@ package com.ggomak.vote.springboot.controller;
 
 import com.ggomak.vote.springboot.domain.enums.BoardType;
 import com.ggomak.vote.springboot.domain.enums.Department;
+import com.ggomak.vote.springboot.domain.enums.RoleType;
 import com.ggomak.vote.springboot.oauthsecurity.annotation.LoginUser;
 import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.service.BoardService;
@@ -13,7 +14,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -143,9 +143,11 @@ public class IndexController {
     public String result(Model model, @LoginUser SessionUser user, @PageableDefault Pageable pageable){
         model.addAttribute("resultList", userService.findCandidateList(pageable));
         model.addAttribute("sessionUser", user);
+
         return "result";
     }
 
+    // 학과별 투표결과
     @GetMapping("/voteresult")
     public String departmentResult(@RequestParam(value = "department") Department department, Model model, @LoginUser SessionUser user){
         model.addAttribute("sessionUser", user);

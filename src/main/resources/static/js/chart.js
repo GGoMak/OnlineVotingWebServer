@@ -61,7 +61,8 @@ function drawChart1() {
         chart1.draw(data1, options1);
 
     }).fail(function (error) {
-        alert(JSON.stringify(error));
+        alert("접근 권한이 없습니다.");
+        window.location.href = '/';
     });
 }
 
@@ -106,7 +107,6 @@ function drawChart2() {
         chart2.draw(data2, options2);
 
     }).fail(function (error) {
-       alert(JSON.stringify(error));
     });
 }
 
@@ -152,7 +152,6 @@ function drawChart3() {
         chart3.draw(data3, options3);
 
     }).fail(function (error){
-        alert(JSON.stringify(error));
     })
 }
 
@@ -190,7 +189,6 @@ function drawChart4() {
         chart4.draw(data4, options4);
 
     }).fail(function (error){
-        alert(JSON.stringify(error));
     })
 }
 

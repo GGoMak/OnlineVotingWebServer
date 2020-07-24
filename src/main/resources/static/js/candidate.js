@@ -11,7 +11,10 @@ function findUser(idx) {
         $('#candidate'+idx+' td').remove();
         $('#candidate'+idx+' tbody').append("<tr><td>" + jsonData.studentId + "</td><td>" + jsonData.department + "</td><td>" + jsonData.name + "</td></tr>");
     }).fail(function(error){
-        alert(JSON.stringify(error));
+        if(error.responseText == "Already Regist") {
+            alert("이미 등록된 후보입니다.");
+            $('#candidate' + idx + ' td').remove();
+        }
     });
 }
 

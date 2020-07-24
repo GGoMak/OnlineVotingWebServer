@@ -9,10 +9,13 @@ import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.repository.CandidateRepository;
 import com.ggomak.vote.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.h2.api.ErrorCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -129,8 +132,15 @@ public class UserService {
     }
 
     @Transactional
-    public User getUser(String studentId){
-        return userRepository.findByStudentId(studentId).get();
+    public Object getUser(String studentId){
+
+        User user = userRepository.findByStudentId(studentId).get();
+
+        if(user.getRoleType() == RoleType.CANDIDATE){
+            return new ResponseEntity<>("Already Regist" , HttpStatus.BAD_REQUEST);
+        }
+
+        return user;
     }
 
     public void fileUpload(MultipartFile multipartFile, String filePath, String fileName){

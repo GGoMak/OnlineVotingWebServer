@@ -40,7 +40,7 @@ public class Application {
                     .build()
             );
 
-            for(int i = 10; i < 30; i++){
+            for(int i = 11; i < 30; i++){
                 userRepository.save(User.builder()
                         .name("컴학" + Integer.toString(i-9))
                         .studentId("201500" + i)
@@ -91,7 +91,7 @@ public class Application {
                         .build());
             }
 
-            for(int i = 30; i < 60; i++){
+            for(int i = 31; i < 60; i++){
                 userRepository.save(User.builder()
                         .name("철학" + Integer.toString(i-29))
                         .studentId("201500" + i)
@@ -193,7 +193,7 @@ public class Application {
                         .build());
             }
 
-            for(int i = 100; i < 120; i++){
+            for(int i = 101; i < 120; i++){
                 userRepository.save(User.builder()
                         .name("회계" + Integer.toString(i-99))
                         .studentId("20150" + i)
@@ -366,12 +366,129 @@ public class Application {
                             .user(admin)
                             .build()));
 
+            User csCandidateUser1 = userRepository.save(User.builder()
+                    .name("컴학" + Integer.toString(1))
+                    .studentId("20150010")
+                    .department(Department.computerScience)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("4"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User csCandidateUser2 = userRepository.save(User.builder()
+                    .name("컴학" + Integer.toString(1))
+                    .studentId("20160010")
+                    .department(Department.computerScience)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("3"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User csCandidateUser3 = userRepository.save(User.builder()
+                    .name("컴학" + Integer.toString(1))
+                    .studentId("20170010")
+                    .department(Department.computerScience)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("2"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User philCandidateUser1 = userRepository.save(User.builder()
+                    .name("철학" + Integer.toString(1))
+                    .studentId("20150030")
+                    .department(Department.philosophy)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("4"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User philCandidateUser2 = userRepository.save(User.builder()
+                    .name("철학" + Integer.toString(1))
+                    .studentId("20160030")
+                    .department(Department.philosophy)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("3"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User philCandidateUser3 = userRepository.save(User.builder()
+                    .name("철학" + Integer.toString(1))
+                    .studentId("20170030")
+                    .department(Department.philosophy)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("2"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User accCandidateUser1 = userRepository.save(User.builder()
+                    .name("회계" + Integer.toString(1))
+                    .studentId("20150100")
+                    .department(Department.accounting)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("4"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User accCandidateUser2 = userRepository.save(User.builder()
+                    .name("회계" + Integer.toString(1))
+                    .studentId("20160100")
+                    .department(Department.accounting)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("3"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
+            User accCandidateUser3 = userRepository.save(User.builder()
+                    .name("회계" + Integer.toString(1))
+                    .studentId("20170100")
+                    .department(Department.accounting)
+                    .dateOfBirth("960000")
+                    .grade(Long.parseLong("2"))
+                    .phoneNumber("123-123-123")
+                    .password("{noop}123")
+                    .lastLoginTime(LocalDateTime.now())
+                    .roleType(RoleType.CANDIDATE)
+                    .isVoted(false)
+                    .build());
+
             candidateRepository.save(Candidate.builder()
                     .teamName("TESTTEAM1")
                     .department(Department.computerScience)
-                    .user1(userRepository.findById(Long.valueOf(2)).get())
-                    .user2(userRepository.findById(Long.valueOf(3)).get())
-                    .user3(userRepository.findById(Long.valueOf(4)).get())
+                    .user1(csCandidateUser1)
+                    .user2(csCandidateUser2)
+                    .user3(csCandidateUser3)
                     .imgPath("/Users/ggomak/Desktop/VoteImgDir/")
                     .thumbnail1("TESTTEAM1_20150011.jpg")
                     .thumbnail2("TESTTEAM1_20150012.jpg")
@@ -383,9 +500,9 @@ public class Application {
             candidateRepository.save(Candidate.builder()
                     .teamName("TESTTEAM2")
                     .department(Department.philosophy)
-                    .user1(userRepository.findById(Long.valueOf(11)).get())
-                    .user2(userRepository.findById(Long.valueOf(12)).get())
-                    .user3(userRepository.findById(Long.valueOf(13)).get())
+                    .user1(philCandidateUser1)
+                    .user2(philCandidateUser2)
+                    .user3(philCandidateUser3)
                     .imgPath("/Users/ggomak/Desktop/VoteImgDir/")
                     .thumbnail1("TESTTEAM2_20150021.jpg")
                     .thumbnail2("TESTTEAM2_20150022.jpg")
@@ -397,9 +514,9 @@ public class Application {
             candidateRepository.save(Candidate.builder()
                     .teamName("TESTTEAM3")
                     .department(Department.accounting)
-                    .user1(userRepository.findById(Long.valueOf(20)).get())
-                    .user2(userRepository.findById(Long.valueOf(21)).get())
-                    .user3(userRepository.findById(Long.valueOf(22)).get())
+                    .user1(accCandidateUser1)
+                    .user2(accCandidateUser2)
+                    .user3(accCandidateUser3)
                     .imgPath("/Users/ggomak/Desktop/VoteImgDir/")
                     .thumbnail1("TESTTEAM3_20150031.jpg")
                     .thumbnail2("TESTTEAM3_20150032.jpg")

@@ -1,6 +1,5 @@
 package com.ggomak.vote.springboot.controller;
 
-import com.ggomak.vote.springboot.domain.User;
 import com.ggomak.vote.springboot.domain.dto.CandidateRegDto;
 import com.ggomak.vote.springboot.domain.dto.UserRoleChangeDTO;
 import com.ggomak.vote.springboot.domain.dto.VoteDTO;
@@ -10,14 +9,11 @@ import com.ggomak.vote.springboot.oauthsecurity.auth.dto.SessionUser;
 import com.ggomak.vote.springboot.service.UserService;
 import com.ggomak.vote.springboot.service.VoteService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +41,7 @@ public class VoteApiController {
     }
 
     @PostMapping("/api/v3/getuser/{studentId}")
-    public User getUser(@PathVariable String studentId) {
+    public Object getUser(@PathVariable String studentId) {
         return userService.getUser(studentId);
     }
 
