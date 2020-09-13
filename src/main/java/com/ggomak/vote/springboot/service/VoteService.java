@@ -75,7 +75,7 @@ public class VoteService {
 
         ArrayList<Integer> result = new ArrayList<>();
 
-        LocalDateTime now = LocalDateTime.of(2020, 7, 3, 18, 0, 0);
+        LocalDateTime now = LocalDateTime.of(2020, 9, 13, 18, 0, 0);
         LocalDateTime time = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 9, 00, 00);
 
         for (LocalDateTime i = time.plusHours(1); i.isBefore(now); i = i.plusHours(1)) {

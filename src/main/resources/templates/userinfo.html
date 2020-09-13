@@ -76,6 +76,7 @@
 										<td>
 										<select id="user_type" name="user_type" style="width: 150px; padding-right: 0">
 											<option th:value="GUEST" th:selected="${user?.roleType?.name() == 'GUEST'}">손님</option>
+											<option th:value="CANDIDATE" th:selected="${user?.roleType?.name() == 'CANDIDATE'}">후보자</option>
 											<option th:value="VOTER" th:selected="${user?.roleType?.name() == 'VOTER'}">투표자</option>
 											<option th:value="ADMIN" th:selected="${user?.roleType?.name() == 'ADMIN'}">관리자</option>
 										</select>

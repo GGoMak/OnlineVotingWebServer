@@ -27,7 +27,7 @@ public class VoteApiController {
     @PostMapping("/api/v3/role")
     public Long roleChange(@RequestBody UserRoleChangeDTO userRoleChangeDTO){
 
-        if(userRoleChangeDTO.getValue().equals("VOTER")){
+        if(userRoleChangeDTO.getIdx() == 0){
             return userService.roleChangeAllVoter(userRoleChangeDTO);
         }
         else {

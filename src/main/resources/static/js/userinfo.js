@@ -5,7 +5,7 @@ $("#usertable tr button").click(function(){
 
     var data = {
         idx : td.eq(0).text(),
-        value : td.eq(4).children().select().val()
+        value : td.eq(5).children().select().val()
     };
 
     $.ajax({

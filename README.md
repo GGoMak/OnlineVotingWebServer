@@ -135,6 +135,12 @@ private String filePath = "{이미지 폴더 경로}";
   - 로그인시 오늘 날짜 표시
   - GUEST의 투표하기 접근 차단
   
+## v1.6.4
+
+  - 회원 관리 역할 지정 시 request 오류 수정
+  - Spring Security 권한 수정
+  - UserRepository 쿼리문 수정
+  
 ## QA
 
   - boardform.html postform.html '목록으로' 뒤로가기 방식 수정
@@ -143,6 +149,7 @@ private String filePath = "{이미지 폴더 경로}";
   - DB에 유저 IP정보 추가
   - ~~Image 업로드 시 접근 문제 발생~~
   - 투표결과 조회를 위한 DB 설계 정리 필요
+  - 후보등록시 없는 학번을 입력할 경우 예외처리 필요
   
 ## 출처
 
